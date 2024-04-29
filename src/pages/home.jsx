@@ -18,6 +18,8 @@ import { featuresData, teamData, contactData } from "@/data";
 export function Home() {
   return (
     <>
+
+      {/* CABECERA */}
       <div className="relative flex h-screen content-center items-center justify-center pt-16 pb-32">
         <div className="absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center" />
         <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
@@ -40,6 +42,8 @@ export function Home() {
           </div>
         </div>
       </div>
+
+      {/* 3 Cuadrados principales */}
       <section className="-mt-32 bg-white px-4 pb-20 pt-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -108,6 +112,8 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      {/* Cuadrados de TEAM */}
       <section className="px-4 pt-20 pb-48">
         <div className="container mx-auto">
           <PageTitle section="Our Team" heading="Here are our heroes">
@@ -136,6 +142,8 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      {/* Bloque contact from y mas */}
       <section className="relative bg-white py-24 px-4">
         <div className="container mx-auto">
           <PageTitle section="Co-Working" heading="Build something">
