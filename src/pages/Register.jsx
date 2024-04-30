@@ -17,6 +17,7 @@
 
       const {
         handleSubmit,
+        register,
         formState: { errors },
       } = useForm();
 
@@ -41,7 +42,7 @@
             </div>
             <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
               <div className="mb-1 flex flex-col gap-6">
-                <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
+                <Typography variant="small" color="blue-gray" className="-mb-3 font-medium" {...register("name", { requiered: "Este campo es obligatorio"})}>
                   Tu nombre
                 </Typography>
                 <Input
@@ -52,7 +53,7 @@
                     className: "before:content-none after:content-none",
                   }}
                 />
-                <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
+                <Typography variant="small" color="blue-gray" className="-mb-3 font-medium" {...register("email", { requiered: "Este campo es obligatorio"})}>
                   Tu email
                 </Typography>
                 <Input
@@ -63,7 +64,7 @@
                     className: "before:content-none after:content-none",
                   }}
                 />
-                <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
+                <Typography variant="small" color="blue-gray" className="-mb-3 font-medium" {...register("password", { requiered: "Este campo es obligatorio"})}>
                   Tu contraseña
                 </Typography>
                 <Input

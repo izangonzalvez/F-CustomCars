@@ -1,4 +1,4 @@
-import { Home, Profile, Login, Register } from "@/pages";
+import { Home, Profile, Login, Register, Car } from "@/pages";
 
 export const routes = [
   {
@@ -20,6 +20,11 @@ export const routes = [
     name: "Register",
     path: "/register",
     element: <Register />,
+  },
+  {
+    name: "Prueba 3D",
+    path: "/prueba",
+    element: <Car />,
   },
 ];
 

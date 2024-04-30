@@ -46,6 +46,7 @@ export const doRegister = (data) => {
                     body: JSON.stringify({ name, email, password })
                 })
                 const response = await data.json();
+                console.log(response.data)
 
                 if (response.success) {
                     dispatch(setUser(response.user))  
