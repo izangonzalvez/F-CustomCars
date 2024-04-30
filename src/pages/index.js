@@ -6,3 +6,4 @@ export * from "@/pages/chat";
 export * from "@/pages/contact";
 export * from "@/pages/Login";
 export * from "@/pages/Register";
+export * from "@/pages/prueba";

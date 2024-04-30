@@ -5,31 +5,44 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { doLogin } from "@/slices/auth/thunks";
+import { useForm } from "react-hook-form";
+import { useState } from 'react';
 
 
-export function Login() {
+export function Login({ setLogin }) {
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const dispatch = useDispatch()
+
+  const check_login = (data) => {
+    const {email, password} = data
+    dispatch(doLogin(email, password));
+}
+
+
   return (
     <section className="m-8 flex gap-4">
       <div className="w-full lg:w-3/5 mt-24">
         <div className="text-center">
           <Typography variant="h2" className="font-bold mb-4">Login</Typography>
-          <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Enter your email and password to Login.</Typography>
+          <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Escribe tu email y tu contraseña para Login.</Typography>
         </div>
         <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
           <div className="mb-1 flex flex-col gap-6">
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
-              Your email
+              Tu email
             </Typography>
             <Input
               size="lg"
-              placeholder="name@mail.com"
+              placeholder="nombre@email.com"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
             />
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
-              Password
+              Contraseña
             </Typography>
             <Input
               type="password"
@@ -48,41 +61,41 @@ export function Login() {
                 color="gray"
                 className="flex items-center justify-start font-medium"
               >
-                I agree the&nbsp;
+                Acepto los&nbsp;
                 <a
                   href="#"
                   className="font-normal text-black transition-colors hover:text-gray-900 underline"
                 >
-                  Terms and Conditions
+                  Terminos y Condiciones
                 </a>
               </Typography>
             }
             containerProps={{ className: "-ml-2.5" }}
           />
-          <Button className="mt-6" fullWidth>
-            Sign In
+          <Button onClick={handleSubmit(check_login)} className="mt-6" fullWidth>
+            Login
           </Button>
 
           <div className="flex items-center justify-between gap-2 mt-6">
-            <Checkbox
+            {/* <Checkbox
               label={
                 <Typography
                   variant="small"
                   color="gray"
                   className="flex items-center justify-start font-medium"
                 >
-                  Subscribe me to newsletter
+                  Subscribe me to newsletter  
                 </Typography>
               }
               containerProps={{ className: "-ml-2.5" }}
-            />
+            /> */}
             <Typography variant="small" className="font-medium text-gray-900">
               <a href="#">
-                Forgot Password
+                He olvidado la contraseña
               </a>
             </Typography>
           </div>
-          <div className="space-y-4 mt-8">
+          {/* <div className="space-y-4 mt-8">
             <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth>
               <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_1156_824)">
@@ -103,17 +116,17 @@ export function Login() {
               <img src="/img/twitter-logo.svg" height={24} width={24} alt="" />
               <span>Login With Twitter</span>
             </Button>
-          </div>
+          </div> */}
           <Typography variant="paragraph" className="text-center text-blue-gray-500 font-medium mt-4">
-            Not registered?
-            <Link to="/sign-up" className="text-gray-900 ml-1">Create account</Link>
+            No estas registrado?
+            <Link to="/register" className="text-gray-900 ml-1">Create una cuenta</Link>
           </Typography>
         </form>
 
       </div>
       <div className="w-2/5 h-full hidden lg:block">
         <img
-          src="/img/pattern.png"
+          src="/img/rx8-derecha.jpg"
           className="h-full w-full object-cover rounded-3xl"
         />
       </div>
