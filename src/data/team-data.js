@@ -1,79 +1,23 @@
 export const teamData = [
   {
-    img: "/img/team-1.jpg",
-    name: "Ryan Tompson",
-    position: "Web Developer",
-    socials: [
-      {
-        color: "light-blue",
-        name: "twitter",
-      },
-      {
-        color: "blue",
-        name: "linkedin",
-      },
-      {
-        color: "pink",
-        name: "dribbble",
-      },
-    ],
+    img: "/img/civic.png",
+    name: "Honda Civic Type R Tuning",
+    position: "Jose Luis De La Fuente Alvarez",
   },
   {
-    img: "/img/team-2.jpg",
-    name: "Romina Hadid",
-    position: "Marketing Specialist",
-    socials: [
-      {
-        color: "light-blue",
-        name: "twitter",
-      },
-      {
-        color: "blue",
-        name: "linkedin",
-      },
-      {
-        color: "pink",
-        name: "dribbble",
-      },
-    ],
+    img: "/img/ferrari.png",
+    name: "Ferrari f141",
+    position: "Mariona Torres Monterde",
   },
   {
-    img: "/img/team-3.jpg",
-    name: "Alexa Smith",
-    position: "UI/UX Designer",
-    socials: [
-      {
-        color: "light-blue",
-        name: "twitter",
-      },
-      {
-        color: "blue",
-        name: "linkedin",
-      },
-      {
-        color: "pink",
-        name: "dribbble",
-      },
-    ],
+    img: "/img/lambo.png",
+    name: "Lambo veneno",
+    position: "Marc Palacios Garcia",
   },
   {
-    img: "/img/team-4.png",
-    name: "Jenna Kardi",
-    position: "Founder and CEO",
-    socials: [
-      {
-        color: "light-blue",
-        name: "twitter",
-      },
-      {
-        color: "blue",
-        name: "facebook",
-      },
-      {
-        color: "pink",
-        name: "dribbble",
-      },
-    ],
+    img: "/img/mustang.png",
+    name: "Mustang Ecoboost",
+    position: "Abdul Al Ambri Sahli",
   },
 ];
 
