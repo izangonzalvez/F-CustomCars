@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Navbar as MTNavbar,
   MobileNav,
@@ -9,9 +9,43 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "@/slices/auth/authSlice";
+import { doLogout } from "@/slices/auth/thunks";
 
 export function Navbar({ brandName, routes, action }) {
   const [openNav, setOpenNav] = React.useState(false);
+  let [ roles, setRoles ] = useState([]);
+  const navigate = useNavigate();
+    
+  const { usuari,authToken } = useSelector (state => state.auth)
+  const dispatch = useDispatch() 
+
+  const getUser = async (e) => {
+    try {
+      const data = await fetch("http://127.0.0.1:8000/api/user", {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+        method: "GET",
+      })
+      const resposta = await data.json();
+      if (resposta.success === true) {
+       
+        dispatch(setUser(resposta.user.email));
+        setRoles(resposta.roles);
+      }else{
+        console.log("La resposta no ha triomfat");
+      }            
+    } catch {
+      console.log("Error");
+    }
+  };
+
+  useEffect(()=>{
+    getUser();
+  }, []) 
 
   React.useEffect(() => {
     window.addEventListener(
@@ -60,6 +94,11 @@ export function Navbar({ brandName, routes, action }) {
     </ul>
   );
 
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(doLogout());
+    navigate("/")
+};
   return (
     <MTNavbar color="transparent" className="p-3">
       <div className="container mx-auto flex items-center justify-between text-white">
@@ -76,6 +115,15 @@ export function Navbar({ brandName, routes, action }) {
             className: "hidden lg:inline-block",
           })} */}
         </div>
+        <div>
+              { usuari } <a>(<span></span> { roles.map (  (v)=> (
+                            <span key={v}> {v} </span>
+                        ) ) })</a>
+            ( 
+              <a href=""></a>
+              <a className="text-orange-800" onClick={logout} href="">Logout</a>)
+              
+          </div>
         <IconButton
           variant="text"
           size="sm"
@@ -88,6 +136,7 @@ export function Navbar({ brandName, routes, action }) {
           ) : (
             <Bars3Icon strokeWidth={2} className="h-6 w-6" />
           )}
+          
         </IconButton>
       </div>
       <MobileNav
@@ -98,6 +147,15 @@ export function Navbar({ brandName, routes, action }) {
           {navList}
           <a href="https://www.material-tailwind.com/blocks/react?ref=mtkr" target="_blank" className="mb-2 block" />
         </div>
+        <div>
+              { usuari } <a>(<span></span> { roles.map (  (v)=> (
+                            <span key={v}> {v} </span>
+                        ) ) })</a>
+            ( 
+              <a href=""></a>
+              <a className="text-orange-800" onClick={logout} href="">Logout</a>)
+              
+          </div>
       </MobileNav>
     </MTNavbar>
   );
