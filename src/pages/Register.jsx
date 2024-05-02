@@ -4,28 +4,39 @@
       Button,
       Typography,
     } from "@material-tailwind/react";
-    import { Link } from "react-router-dom";
+    import { Link, Navigate } from "react-router-dom";
     import { doRegister } from "@/slices/auth/thunks";
     import { useSelector, useDispatch } from 'react-redux';
+    import { useNavigate } from "react-router-dom";
     import { useForm } from "react-hook-form";
+    import { useState } from "react";
 
 
-    export function Register() {
-
-      const { usuari } = useSelector (state => state.auth)
-      const dispatch = useDispatch()
-
+    export const Register = ({ setLogin }) => {
+      const { usuari,authToken } = useSelector (state => state.auth)
+      const navigate = useNavigate();
+      const dispatch = useDispatch() 
       const {
-        handleSubmit,
         register,
+        handleSubmit,
+        getValues,
+        setError,
         formState: { errors },
       } = useForm();
 
-      const check_register = (data) => {
-        let {name, email, password} = data
-        dispatch(doRegister({name, email, password}))
-      }
+      let usuaris = [];
 
+      usuaris = JSON.parse(localStorage.getItem("usuaris")) || [];
+      console.log(usuaris)
+
+      const onSubmit = (data) => {
+        // Utiliza un nombre diferente para la función que maneja el envío del formulario
+        dispatch(doRegister(data));
+      };
+
+      if (authToken)  {
+        navigate("/") }
+      
 
       return (
         <section className="m-8 flex">
@@ -42,10 +53,11 @@
             </div>
             <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
               <div className="mb-1 flex flex-col gap-6">
-                <Typography variant="small" color="blue-gray" className="-mb-3 font-medium" {...register("name", { requiered: "Este campo es obligatorio"})}>
+                <Typography variant="small" color="blue-gray" className="-mb-3 font-medium" >
                   Tu nombre
                 </Typography>
                 <Input
+                {...register("name", { requiered: "Este campo es obligatorio"})}
                   size="lg"
                   placeholder="nombre"
                   className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -53,10 +65,11 @@
                     className: "before:content-none after:content-none",
                   }}
                 />
-                <Typography variant="small" color="blue-gray" className="-mb-3 font-medium" {...register("email", { requiered: "Este campo es obligatorio"})}>
+                <Typography variant="small" color="blue-gray" className="-mb-3 font-medium" >
                   Tu email
                 </Typography>
                 <Input
+                {...register("email", { requiered: "Este campo es obligatorio"})}
                   size="lg"
                   placeholder="nombre@email.com"
                   className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -64,10 +77,11 @@
                     className: "before:content-none after:content-none",
                   }}
                 />
-                <Typography variant="small" color="blue-gray" className="-mb-3 font-medium" {...register("password", { requiered: "Este campo es obligatorio"})}>
+                <Typography variant="small" color="blue-gray" className="-mb-3 font-medium" >
                   Tu contraseña
                 </Typography>
                 <Input
+                {...register("password", { requiered: "Este campo es obligatorio"})}
                   size="lg"
                   placeholder="Password1234"
                   className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -95,7 +109,7 @@
                 }
                 containerProps={{ className: "-ml-2.5" }}
               />
-              <Button onClick={handleSubmit(check_register)} className="mt-6" fullWidth>
+              <Button onClick={handleSubmit(onSubmit)} className="mt-6" fullWidth>
                 Registrate
               </Button>
 
@@ -131,5 +145,4 @@
         </section>
       );
     }
-
     export default Register;

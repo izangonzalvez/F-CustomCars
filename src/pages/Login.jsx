@@ -4,21 +4,38 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { doLogin } from "@/slices/auth/thunks";
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
+import { setAuthToken } from "@/slices/auth/authSlice";
 
 
 export function Login({ setLogin }) {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  let usuaris = []
+  const navigate = useNavigate();
+  let [ error, setError] = useState("");
+
+  const { usuari,authToken } = useSelector (state => state.auth)
+
   const dispatch = useDispatch()
+  let token =  JSON.parse(localStorage.getItem('authToken')) || "";
+  console.log(token)
+  setAuthToken(token)
+  usuaris = JSON.parse(localStorage.getItem('usuaris')) || [];
+
 
   const check_login = (data) => {
     const {email, password} = data
     dispatch(doLogin(email, password));
 }
+
+if (authToken) {
+  navigate("/") }
+
+
 
 
   return (
@@ -30,10 +47,16 @@ export function Login({ setLogin }) {
         </div>
         <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
           <div className="mb-1 flex flex-col gap-6">
-            <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
+            <Typography variant="small" color="blue-gray" className="-mb-3 font-medium" >
               Tu email
             </Typography>
             <Input
+              {...register("email", {
+                required: "Por favor, introdueix el teu correu electrònic",
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Por favor, introdueix un correu electrònic vàlid"
+                }})} 
               size="lg"
               placeholder="nombre@email.com"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -45,6 +68,7 @@ export function Login({ setLogin }) {
               Contraseña
             </Typography>
             <Input
+            {...register("password", { required: "Sisplau, la contrassenya no pot ser buida" })}
               type="password"
               size="lg"
               placeholder="********"
