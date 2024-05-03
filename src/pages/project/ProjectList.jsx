@@ -3,7 +3,6 @@ import { Footer } from "@/widgets/layout";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { listCars } from '@/slices/car/thunks';
-import { carSlice } from '@/slices/car/carSlices';
 
 export function ProjectList() {
   const { usuari, authToken } = useSelector(state => state.auth);
@@ -57,7 +56,8 @@ export function ProjectList() {
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.sideskirt_id}</td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       <Link to={`/cars/${car.id}`} className="text-cyan-600">👁️</Link>
-      
+                      <button onClick={() => deleteCar(car.id)} className="ml-2 text-red-600">🗑️</button>
+                      <Link to={`/cars/${car.id}/edit`} className="ml-2 text-yellow-600">🖊️</Link>
                     </td>
                   </tr>
                 ))
