@@ -46,14 +46,14 @@ export function ProjectList() {
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.name}</td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.color}</td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.horn}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.wheel_id}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.engine_id}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.suspension_id}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.brake_id}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.exhaustpipe_id}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.light_id}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.spoiler_id}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.sideskirt_id}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.wheel.name}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.engine.name}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.suspension.name}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.brake.name}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.exhaustpipe.type}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.light.name}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.spoiler.type}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.sideskirt.material}</td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       <Link to={`/cars/${car.id}`} className="text-cyan-600">👁️</Link>
                       <button onClick={() => deleteCar(car.id)} className="ml-2 text-red-600">🗑️</button>

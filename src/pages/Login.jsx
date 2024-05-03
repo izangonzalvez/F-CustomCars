@@ -21,7 +21,7 @@ export function Login({ setLogin }) {
   const { usuari,authToken } = useSelector (state => state.auth)
 
   const dispatch = useDispatch()
-  let token =  JSON.parse(localStorage.getItem('authToken')) || "";
+  let token =  localStorage.getItem('authToken') || "";
   console.log(token)
   setAuthToken(token)
   usuaris = JSON.parse(localStorage.getItem('usuaris')) || [];

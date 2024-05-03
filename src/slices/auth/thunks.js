@@ -15,7 +15,8 @@ export const doLogin = (email, password) => {
             const response = await data.json()
             console.log(response)
             if (response.success == true) {
-                localStorage.setItem('authToken', JSON.stringify(response.authToken));
+                localStorage.setItem('authToken', response.authToken);
+                localStorage.setItem('user', email);
                 dispatch(setAuthToken(response.authToken))
                 dispatch(setUser(email))  
                 dispatch(setRoles(response.roles))
@@ -46,7 +47,8 @@ export const doRegister = (data) => {
             console.log(response)
 
             if (response.ok) {
-                localStorage.setItem('authToken', JSON.stringify(responseData.authToken));
+                localStorage.setItem('authToken', responseData.authToken);
+                localStorage.setItem('user', email);
                 dispatch(setUser(email))  
                 dispatch(setAuthToken(responseData.authToken));
                 dispatch(setRoles(response.roles)) 
@@ -60,20 +62,24 @@ export const doRegister = (data) => {
 }
 
 export const doLogout = () => {
+    
     return async (dispatch, getState) => {
+        console.log(getState().auth.authToken)
         try {
             const response = await fetch("http://127.0.0.1:8000/api/logout", {
                 headers: {
                     Accept: "application/json",
-                    Authorization: `Bearer ${authToken}`,
+                    Authorization: `Bearer ${getState().auth.authToken}`,
                 },
                 method: "POST",
             });
-
+            
             const responseData = await response.json();
-
+            console.log(response)
             if (response.ok) {
+                console.log('hols')
                 localStorage.removeItem('authToken');
+                localStorage.removeItem('user');
                 dispatch(setAuthToken(""));
             } else {
                 console.error("Error during logout:", responseData.message);
