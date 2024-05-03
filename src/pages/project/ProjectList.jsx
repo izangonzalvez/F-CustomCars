@@ -3,29 +3,16 @@ import { Footer } from "@/widgets/layout";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { listCars } from '@/slices/car/thunks';
-import { setCars } from '@/slices/car/carSlices';
+import { carSlice } from '@/slices/car/carSlices';
 
 export function ProjectList() {
-
-  
-  const { usuari,authToken } = useSelector (state => state.auth)
-  const { cars } = useSelector (state => state.cars);
-  const dispatch = useDispatch()
+  const { usuari, authToken } = useSelector(state => state.auth);
+  const { cars } = useSelector(state => state.cars);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(listCars(authToken));
-  }, [])
-
-  // const projects = [
-
-  //   { 
-  //     id: 1, name: 'Proyecto 1', color: 'Azul', bozina: 'Bosch', llanta: 'Pirelli', motor: 'V8', suspension: 'Deportiva', frenos: 'Brembo', escape: 'Akrapovic', faros: 'LED', aleron: 'Carbono', taloneras: 'Fibra de vidrio', author: 'Autor 1' 
-  //   },
-  //   { 
-  //     id: 2, name: 'Proyecto 2', color: 'Rojo', bozina: 'Sony', llanta: 'Michelin', motor: 'V6', suspension: 'Normal', frenos: 'EBC', escape: 'Remus', faros: 'Xenon', aleron: 'Aluminio', taloneras: 'Plástico', author: 'Autor 2' 
-  //   },
-
-  // ];
+  }, []);
 
   return (
     <>
@@ -50,31 +37,35 @@ export function ProjectList() {
                 <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Faros</th>
                 <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Alerón</th>
                 <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Taloneras</th>
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Autor</th>
                 <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Acciones</th>
               </tr>
             </thead>
             <tbody>
-              {cars.map(car => (
-                <tr key={car.id} className="border-b">
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.name}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.color}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.bozina}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.llanta}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.motor}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.suspension}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.frenos}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.escape}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.faros}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.aleron}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.taloneras}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.author}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                    <Link to={`/cars/${car.id}`} className="text-cyan-600">👁️</Link>
-                    {/* Agrega los botones de edición y eliminación aquí */}
-                  </td>
+              {cars ? (
+                cars.map(car => (
+                  <tr key={car.id} className="border-b">
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.name}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.color}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.horn}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.wheel_id}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.engine_id}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.suspension_id}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.brake_id}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.exhaustpipe_id}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.light_id}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.spoiler_id}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.sideskirt_id}</td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <Link to={`/cars/${car.id}`} className="text-cyan-600">👁️</Link>
+      
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="13" className="text-center py-4">Cargando...</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
@@ -83,7 +74,6 @@ export function ProjectList() {
       <div className="bg-white fixed bottom-0 left-0 right-0">
         <Footer />
       </div>
-
     </>
   );
 }
