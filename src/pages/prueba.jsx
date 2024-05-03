@@ -9,7 +9,6 @@ export function Car() {
   useEffect(() => {
     let scene, camera, renderer, controls;
 
-    // Inicializar Three.js
     function initThree() {
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -28,12 +27,19 @@ export function Car() {
       camera.position.z = 5;
     }
 
-    // Cargar modelo .obj
     function loadModel() {
       const loader = new OBJLoader();
       loader.load(
         '/3d/bugatti.obj',
         function (object) {
+          // Crear un material con color azul
+          const material = new THREE.MeshStandardMaterial({ color: 0x0000ff });
+          // Iterar sobre las partes del modelo y asignar el material
+          object.traverse(function (child) {
+            if (child instanceof THREE.Mesh) {
+              child.material = material;
+            }
+          });
           scene.add(object);
         },
         function (xhr) {
@@ -45,21 +51,18 @@ export function Car() {
       );
     }
 
-    // Renderizar la escena
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
       renderer.render(scene, camera);
     }
 
-    // Inicializar Three.js y cargar el modelo al montar el componente
     initThree();
     loadModel();
     animate();
 
-    // Limpiar Three.js al desmontar el componente
     return () => {
-      scene.remove(...scene.children); // Eliminar todos los objetos de la escena
+      scene.remove(...scene.children);
       renderer.dispose();
     };
   }, []);
