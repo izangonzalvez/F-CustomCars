@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const carSlice = createSlice ({
     name: "cars",
     initialState: {
-        car: [],
+        car: null,
         cars: [],
         image: "",
         isLoading: true,
@@ -22,7 +22,7 @@ export const carSlice = createSlice ({
             state.cars = action.payload
             state.isLoading = false
         },
-        setIgame: (state, action) => {
+        setIgame: (state, action) => { 
             state.image = action.payload
         },
         setAuthToken: (state, action) => {

@@ -1,5 +1,5 @@
 import { set } from "react-hook-form";
-import { setLoading,setCar, setCars, setIgame, setIgame, setAuthToken, setError} from "./carSlices";
+import { setLoading,setCar, setCars, setIgame, setAuthToken, setError} from "./carSlices";
 
 export const listCars = (authToken) => {
     return async (dispatch, getState) => {

@@ -2,27 +2,30 @@ import { Link } from 'react-router-dom';
 import { Footer } from "@/widgets/layout";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-// import { listCars } from '@/slices/car/thunks';
+import { listCars } from '@/slices/car/thunks';
+import { setCars } from '@/slices/car/carSlices';
 
 export function ProjectList() {
 
-  // const { cars } = useSelector (state => state.cars)
+  
   const { usuari,authToken } = useSelector (state => state.auth)
+  const { cars } = useSelector (state => state.cars);
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   dispatch(listCars(authToken));
-  // }, [])
+  useEffect(() => {
+    dispatch(listCars(authToken));
+  }, [])
 
-  const projects = [
-    { 
-      id: 1, name: 'Proyecto 1', color: 'Azul', bozina: 'Bosch', llanta: 'Pirelli', motor: 'V8', suspension: 'Deportiva', frenos: 'Brembo', escape: 'Akrapovic', faros: 'LED', aleron: 'Carbono', taloneras: 'Fibra de vidrio', author: 'Autor 1' 
-    },
-    { 
-      id: 2, name: 'Proyecto 2', color: 'Rojo', bozina: 'Sony', llanta: 'Michelin', motor: 'V6', suspension: 'Normal', frenos: 'EBC', escape: 'Remus', faros: 'Xenon', aleron: 'Aluminio', taloneras: 'Plástico', author: 'Autor 2' 
-    },
+  // const projects = [
 
-  ];
+  //   { 
+  //     id: 1, name: 'Proyecto 1', color: 'Azul', bozina: 'Bosch', llanta: 'Pirelli', motor: 'V8', suspension: 'Deportiva', frenos: 'Brembo', escape: 'Akrapovic', faros: 'LED', aleron: 'Carbono', taloneras: 'Fibra de vidrio', author: 'Autor 1' 
+  //   },
+  //   { 
+  //     id: 2, name: 'Proyecto 2', color: 'Rojo', bozina: 'Sony', llanta: 'Michelin', motor: 'V6', suspension: 'Normal', frenos: 'EBC', escape: 'Remus', faros: 'Xenon', aleron: 'Aluminio', taloneras: 'Plástico', author: 'Autor 2' 
+  //   },
+
+  // ];
 
   return (
     <>
@@ -52,22 +55,22 @@ export function ProjectList() {
               </tr>
             </thead>
             <tbody>
-              {projects.map(project => (
-                <tr key={project.id} className="border-b">
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{project.name}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{project.color}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{project.bozina}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{project.llanta}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{project.motor}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{project.suspension}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{project.frenos}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{project.escape}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{project.faros}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{project.aleron}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{project.taloneras}</td>
-                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{project.author}</td>
+              {cars.map(car => (
+                <tr key={car.id} className="border-b">
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.name}</td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.color}</td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.bozina}</td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.llanta}</td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.motor}</td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.suspension}</td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.frenos}</td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.escape}</td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.faros}</td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.aleron}</td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.taloneras}</td>
+                  <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.author}</td>
                   <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                    <Link to={`/projects/${project.id}`} className="text-cyan-600">👁️</Link>
+                    <Link to={`/cars/${car.id}`} className="text-cyan-600">👁️</Link>
                     {/* Agrega los botones de edición y eliminación aquí */}
                   </td>
                 </tr>
