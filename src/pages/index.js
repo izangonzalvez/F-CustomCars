@@ -1,6 +1,7 @@
 export * from "@/pages/home";
 export * from "@/pages/profile";
 export * from "@/pages/project/ProjectList";
+export * from "@/pages/project/ProjectAdd";
 export * from "@/pages/chat/community";
 export * from "@/pages/chat/chat";
 export * from "@/pages/contact/contact";
