@@ -1,9 +1,9 @@
-import { setWheels, setLoading, setError } from "./wheelSlice";
+import { setLights, setLoading, setError } from "./lightSlice";
 
-export const listWheels = () => {
+export const listLights = () => {
     return async (dispatch) => {
         try {
-            const data = await fetch("http://127.0.0.1:8000/api/wheels", {
+            const data = await fetch("http://127.0.0.1:8000/api/lights", {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
@@ -14,7 +14,7 @@ export const listWheels = () => {
             const response = await data.json();
 
             if (response.success === true) {
-                dispatch(setWheels(response.data));
+                dispatch(setLights(response.data));
             } else {
                 dispatch(setError(response));
             }

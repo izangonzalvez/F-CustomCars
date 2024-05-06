@@ -25,3 +25,56 @@ export const listCars = (authToken) => {
 
     }
 }
+
+export const createCar = (carData, authToken) => {
+    return async (dispatch) => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/cars", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${authToken}`,
+                },
+                body: JSON.stringify(carData),
+            });
+
+            const responseData = await response.json();
+
+            if (responseData.success === true) {
+                dispatch(setCars(responseData.data));
+                dispatch(setAuthToken(responseData.authToken));
+            } else {
+                dispatch(setError(responseData));
+            }
+        } catch (error) {
+            dispatch(setError(error.message));
+        }
+    };
+};
+
+export const showCars = (carId, authToken) => {
+  return async (dispatch) => {
+      try {
+          const response = await fetch(`http://127.0.0.1:8000/api/cars/${carId}`, {
+              headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${authToken}`,
+              },
+              method: "GET",
+          });
+
+          const responseData = await response.json();
+
+          if (responseData.success === true) {
+              dispatch(setCar(responseData.data));
+              dispatch(setAuthToken(responseData.authToken));
+          } else {
+              dispatch(setError(responseData));
+          }
+      } catch (error) {
+          dispatch(setError(error.message));
+      }
+  };
+};

@@ -1,9 +1,9 @@
-import { setWheels, setLoading, setError } from "./wheelSlice";
+import { setSuspensions, setLoading, setError } from "./suspensionSlice";
 
-export const listWheels = () => {
+export const listSuspensions = () => {
     return async (dispatch) => {
         try {
-            const data = await fetch("http://127.0.0.1:8000/api/wheels", {
+            const data = await fetch("http://127.0.0.1:8000/api/suspensions", {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
@@ -14,7 +14,7 @@ export const listWheels = () => {
             const response = await data.json();
 
             if (response.success === true) {
-                dispatch(setWheels(response.data));
+                dispatch(setSuspensions(response.data));
             } else {
                 dispatch(setError(response));
             }

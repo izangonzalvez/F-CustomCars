@@ -8,7 +8,6 @@ export function ProjectList() {
   const { usuari, authToken } = useSelector(state => state.auth);
   const { cars } = useSelector(state => state.cars);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(listCars(authToken));
   }, []);
@@ -21,6 +20,13 @@ export function ProjectList() {
       </section>
       <div className="container mx-auto py-12">
         <h1 className="text-3xl font-bold mb-8">Mis Proyectos</h1>
+        <div className="mb-8">
+          <Link to="/projectAdd">
+            <button className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg">
+              Crear Proyecto
+            </button>
+          </Link>
+        </div>
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white">
             <thead>
@@ -55,9 +61,9 @@ export function ProjectList() {
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.spoiler.type}</td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.sideskirt.material}</td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <Link to={`/cars/${car.id}`} className="text-cyan-600">👁️</Link>
+                      <Link to={`/project/${car.id}`} className="text-cyan-600">👁️</Link>
                       <button onClick={() => deleteCar(car.id)} className="ml-2 text-red-600">🗑️</button>
-                      <Link to={`/cars/${car.id}/edit`} className="ml-2 text-yellow-600">🖊️</Link>
+                      <Link to={`/project/${car.id}/edit`} className="ml-2 text-yellow-600">🖊️</Link>
                     </td>
                   </tr>
                 ))
