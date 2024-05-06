@@ -61,9 +61,9 @@ export function ProjectList() {
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.spoiler.type}</td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.sideskirt.material}</td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <Link to={`/cars/${car.id}`} className="text-cyan-600">👁️</Link>
+                      <Link to={`/project/${car.id}`} className="text-cyan-600">👁️</Link>
                       <button onClick={() => deleteCar(car.id)} className="ml-2 text-red-600">🗑️</button>
-                      <Link to={`/cars/${car.id}/edit`} className="ml-2 text-yellow-600">🖊️</Link>
+                      <Link to={`/project/${car.id}/edit`} className="ml-2 text-yellow-600">🖊️</Link>
                     </td>
                   </tr>
                 ))
