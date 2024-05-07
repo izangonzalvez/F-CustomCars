@@ -14,7 +14,8 @@ import { Footer } from '@/widgets/layout';
 
 export function ProjectAdd() {
   const dispatch = useDispatch();
-
+  const post = 0
+  const user_id = 1;
   // Utilizando useSelector para obtener los datos del estado de Redux
   const wheels = useSelector(state => state.wheels.wheels);
   const engines = useSelector(state => state.engines.engines);
@@ -65,48 +66,81 @@ export function ProjectAdd() {
     console.log("Sideskirts:", sideskirts);
   }, [wheels, engines, suspensions, brakes, exhaustpipes, lights, spoilers, sideskirts]);
 
-  const mapPieceNameToId = (pieces, selectedPieceName) => {
-    const selectedPiece = pieces.find(piece => piece.name === selectedPieceName);
-    return selectedPiece ? selectedPiece.id : ''; 
-  };
+  // const mapPieceNameToId = (pieces, selectedPieceName) => {
+  //   const selectedPiece = pieces.find(piece => piece.name === selectedPieceName);
+  //   return selectedPiece ? selectedPiece.id : ''; 
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  
+  //   const mappedWheelId = mapPieceNameToId(wheels, wheel);
+  //   const mappedEngineId = mapPieceNameToId(engines, engine);
+  //   const mappedSuspensionId = mapPieceNameToId(suspensions, suspension);
+  //   const mappedBrakeId = mapPieceNameToId(brakes, brake);
+  //   const mappedExhaustpipeId = mapPieceNameToId(exhaustpipes, exhaustpipe);
+  //   const mappedLightId = mapPieceNameToId(lights, light);
+  //   const mappedSpoilerId = mapPieceNameToId(spoilers, spoiler);
+  //   const mappedSideskirtId = mapPieceNameToId(sideskirts, sideskirt);
+  
+  //   const mappedCarData = {
+  //     name,
+  //     color,
+  //     horn,
+  //     wheel: mappedWheelId,
+  //     engine: mappedEngineId,
+  //     suspension: mappedSuspensionId,
+  //     brake: mappedBrakeId,
+  //     exhaustpipe: mappedExhaustpipeId,
+  //     light: mappedLightId,
+  //     spoiler: mappedSpoilerId,
+  //     sideskirt: mappedSideskirtId
+  //   };
+  
+  //   try {
+  //     const response = await dispatch(createCar(mappedCarData));
+  //     if (response && response.success !== undefined) {
+  //       if (response.success) {
+  //         console.log('Car created successfully!');
+  //       } else {
+  //         console.error('Failed to create car:', response);
+  //       }
+  //     } else {
+  //       console.error('Failed to create car: Invalid response format');
+  //     }
+  //   } catch (error) {
+  //     console.error('Failed to create car:', error.message);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const mappedWheelId = mapPieceNameToId(wheels, wheel);
-    const mappedEngineId = mapPieceNameToId(engines, engine);
-    const mappedSuspensionId = mapPieceNameToId(suspensions, suspension);
-    const mappedBrakeId = mapPieceNameToId(brakes, brake);
-    const mappedExhaustpipeId = mapPieceNameToId(exhaustpipes, exhaustpipe);
-    const mappedLightId = mapPieceNameToId(lights, light);
-    const mappedSpoilerId = mapPieceNameToId(spoilers, spoiler);
-    const mappedSideskirtId = mapPieceNameToId(sideskirts, sideskirt);
-  
-    const mappedCarData = {
+
+    const carData = {
       name,
       color,
       horn,
-      wheel: mappedWheelId,
-      engine: mappedEngineId,
-      suspension: mappedSuspensionId,
-      brake: mappedBrakeId,
-      exhaustpipe: mappedExhaustpipeId,
-      light: mappedLightId,
-      spoiler: mappedSpoilerId,
-      sideskirt: mappedSideskirtId
+      wheel,
+      engine,
+      suspension,
+      brake,
+      exhaustpipe,
+      light,
+      spoiler,
+      sideskirt,
+      post,
+      user_id
     };
-  
+
     try {
-      const response = await dispatch(createCar(mappedCarData));
-      if (response && response.success !== undefined) {
-        if (response.success) {
-          console.log('Car created successfully!');
-        } else {
-          console.error('Failed to create car:', response);
-        }
+      const response = await dispatch(createCar(carData));
+    
+      if (response && response.success) {
+        console.log('Car created successfully!');
       } else {
-        console.error('Failed to create car: Invalid response format');
+        console.error('Failed to create car:', response);
       }
+      
     } catch (error) {
       console.error('Failed to create car:', error.message);
     }

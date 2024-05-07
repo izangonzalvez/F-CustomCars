@@ -39,18 +39,16 @@ export const createCar = (carData, authToken) => {
                 body: JSON.stringify(carData),
             });
 
-            if (!response.ok) {
-                throw new Error('Failed to create car. HTTP status: ' + response.status);
-            }
-
             const responseData = await response.json();
-            if (responseData && responseData.message) {
-                console.log('Car created successfully!');
+
+            if (responseData.success === true) {
+                dispatch(setCars(responseData.data));
+                dispatch(setAuthToken(responseData.authToken));
             } else {
-                console.error('Failed to create car:', responseData);
+                dispatch(setError(responseData));
             }
         } catch (error) {
-            console.error('Failed to create car:', error.message);
+            dispatch(setError(error.message));
         }
     };
 };
