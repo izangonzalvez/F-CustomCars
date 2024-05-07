@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import { Footer } from "@/widgets/layout";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { listCars } from '@/slices/car/thunks';
+import { useEffect, useState } from 'react';
+import { listCars, deleteCar as deleteCarAction } from '@/slices/car/thunks';
 
 export function ProjectList() {
   const { usuari, authToken } = useSelector(state => state.auth);
@@ -11,6 +11,11 @@ export function ProjectList() {
   useEffect(() => {
     dispatch(listCars(authToken));
   }, []);
+
+  const deleteCar = (carId) => {
+    dispatch(deleteCarAction(carId, authToken));
+    dispatch(listCars(authToken));
+  };
 
   return (
     <>
@@ -27,57 +32,39 @@ export function ProjectList() {
             </button>
           </Link>
         </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white">
-            <thead>
-              <tr className="bg-gray-100 border-b">
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Nombre</th>
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Color</th>
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Bozina</th>
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Llanta</th>
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Motor</th>
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Suspensión</th>
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Frenos</th>
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Escape</th>
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Faros</th>
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Alerón</th>
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Taloneras</th>
-                <th className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cars ? (
-                cars.map(car => (
-                  <tr key={car.id} className="border-b">
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.name}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.color}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.horn}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.wheel.name}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.engine.name}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.suspension.name}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.brake.name}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.exhaustpipe.type}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.light.name}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.spoiler.type}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.sideskirt.material}</td>
-                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <Link to={`/project/${car.id}`} className="text-cyan-600">👁️</Link>
-                      <button onClick={() => deleteCar(car.id)} className="ml-2 text-red-600">🗑️</button>
-                      <Link to={`/project/${car.id}/edit`} className="ml-2 text-yellow-600">🖊️</Link>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="13" className="text-center py-4">Cargando...</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {cars ? (
+            cars.map(car => (
+              <div key={car.id} className="border rounded-lg shadow-md p-4 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                <div className="flex flex-col">
+                  <div className="text-lg font-semibold mb-2">{car.name}</div>
+                  <div className="flex flex-col gap-2">
+                    <div><span className="font-semibold">Color:</span> {car.color}</div>
+                    <div><span className="font-semibold">Bozina:</span> {car.horn}</div>
+                    <div><span className="font-semibold">Llanta:</span> {car.wheel.name}</div>
+                    <div><span className="font-semibold">Motor:</span> {car.engine.name}</div>
+                    <div><span className="font-semibold">Suspensión:</span> {car.suspension.name}</div>
+                    <div><span className="font-semibold">Frenos:</span> {car.brake.name}</div>
+                    <div><span className="font-semibold">Escape:</span> {car.exhaustpipe.type}</div>
+                    <div><span className="font-semibold">Faros:</span> {car.light.name}</div>
+                    <div><span className="font-semibold">Alerón:</span> {car.spoiler.type}</div>
+                    <div><span className="font-semibold">Taloneras:</span> {car.sideskirt.material}</div>
+                  </div>
+                </div>
+                <div className="flex justify-between mt-4">
+                  <Link to={`/project/${car.id}`} className="text-cyan-600">👁️</Link>
+                  <button onClick={() => deleteCar(car.id)} className="text-red-600">🗑️</button>
+                  <Link to={`/project/${car.id}/edit`} className="text-yellow-600">🖊️</Link>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-center">Cargando...</p>
+          )}
         </div>
       </div>
-      
-      <div className="bg-white fixed bottom-0 left-0 right-0">
+      <br/><br/>
+      <div className="fixed bottom-0 left-0 right-0">
         <Footer />
       </div>
     </>

@@ -78,3 +78,29 @@ export const showCars = (carId, authToken) => {
       }
   };
 };
+
+export const deleteCar = (carId, authToken) => {
+    return async (dispatch) => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/cars/${carId}`, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+          method: "DELETE",
+        });
+  
+        const responseData = await response.json();
+  
+        if (responseData.success === true) {
+          dispatch(setCars(responseData.data));
+          dispatch(setAuthToken(responseData.authToken));
+        } else {
+          dispatch(setError(responseData));
+        }
+      } catch (error) {
+        dispatch(setError(error.message));
+      }
+    };
+  };

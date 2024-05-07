@@ -8,7 +8,7 @@ export const carSlice = createSlice ({
         image: "",
         isLoading: true,
         authToken: "",
-        error: "",
+        error: ""
     },
     reducers: {
         setLoading: (state, action) =>{
