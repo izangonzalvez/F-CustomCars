@@ -39,19 +39,22 @@ export const createCar = (carData, authToken) => {
                 body: JSON.stringify(carData),
             });
 
-            const responseData = await response.json();
+            if (!response.ok) {
+                throw new Error('Failed to create car. HTTP status: ' + response.status);
+            }
 
-            if (responseData.success === true) {
-                dispatch(setCars(responseData.data));
-                dispatch(setAuthToken(responseData.authToken));
+            const responseData = await response.json();
+            if (responseData && responseData.message) {
+                console.log('Car created successfully!');
             } else {
-                dispatch(setError(responseData));
+                console.error('Failed to create car:', responseData);
             }
         } catch (error) {
-            dispatch(setError(error.message));
+            console.error('Failed to create car:', error.message);
         }
     };
 };
+
 
 export const showCars = (carId, authToken) => {
   return async (dispatch) => {

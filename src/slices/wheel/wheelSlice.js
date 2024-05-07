@@ -3,11 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 export const wheelSlice = createSlice ({
     name: "wheels",
     initialState: {
+        wheel: null,
         wheels: [],
         isLoading: true,
         error: "",
     },
     reducers: {
+        setWheel:(state, action) => {
+            state.wheel = action.payload;
+            state.isLoading = false
+        },
         setWheels: (state, action) => {
             state.wheels = action.payload;
             state.isLoading = false;
@@ -21,5 +26,5 @@ export const wheelSlice = createSlice ({
     }
 });
 
-export const { setWheels, setLoading, setError } = wheelSlice.actions;
+export const { setWheel, setWheels, setLoading, setError } = wheelSlice.actions;
 export const wheelReducers = wheelSlice.reducer;

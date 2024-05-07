@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ChromePicker } from 'react-color';
 import { createCar } from '@/slices/car/thunks';
 import { listWheels } from '@/slices/wheel/thunks';
 import { listEngines } from '@/slices/engine/thunks';
@@ -11,8 +12,18 @@ import { listSpoilers } from '@/slices/spoiler/thunks';
 import { listSideskirts } from '@/slices/sideskirt/thunks';
 import { Footer } from '@/widgets/layout';
 
-export function ProjectAdd({ wheels, engines, suspensions, brakes, exhaustpipes, lights, spoilers, sideskirts }) {
+export function ProjectAdd() {
   const dispatch = useDispatch();
+
+  // Utilizando useSelector para obtener los datos del estado de Redux
+  const wheels = useSelector(state => state.wheels.wheels);
+  const engines = useSelector(state => state.engines.engines);
+  const suspensions = useSelector(state => state.suspensions.suspensions);
+  const brakes = useSelector(state => state.brakes.brakes);
+  const exhaustpipes = useSelector(state => state.exhaustpipes.exhaustpipes);
+  const lights = useSelector(state => state.lights.lights);
+  const spoilers = useSelector(state => state.spoilers.spoilers);
+  const sideskirts = useSelector(state => state.sideskirts.sideskirts);
 
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
@@ -26,7 +37,13 @@ export function ProjectAdd({ wheels, engines, suspensions, brakes, exhaustpipes,
   const [spoiler, setSpoiler] = useState('');
   const [sideskirt, setSideskirt] = useState('');
 
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const handleChangeColor = (newColor) => {
+    setColor(newColor.hex);
+  };
+
   useEffect(() => {
+    // Despachando las acciones para cargar los datos al montar el componente
     dispatch(listWheels());
     dispatch(listEngines());
     dispatch(listSuspensions());
@@ -48,11 +65,54 @@ export function ProjectAdd({ wheels, engines, suspensions, brakes, exhaustpipes,
     console.log("Sideskirts:", sideskirts);
   }, [wheels, engines, suspensions, brakes, exhaustpipes, lights, spoilers, sideskirts]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ name, color, horn, wheel, engine, suspension, brake, exhaustpipe, light, spoiler, sideskirt });
-    dispatch(createCar({ name, color, horn, wheel, engine, suspension, brake, exhaustpipe, light, spoiler, sideskirt }));
+  const mapPieceNameToId = (pieces, selectedPieceName) => {
+    const selectedPiece = pieces.find(piece => piece.name === selectedPieceName);
+    return selectedPiece ? selectedPiece.id : ''; 
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const mappedWheelId = mapPieceNameToId(wheels, wheel);
+    const mappedEngineId = mapPieceNameToId(engines, engine);
+    const mappedSuspensionId = mapPieceNameToId(suspensions, suspension);
+    const mappedBrakeId = mapPieceNameToId(brakes, brake);
+    const mappedExhaustpipeId = mapPieceNameToId(exhaustpipes, exhaustpipe);
+    const mappedLightId = mapPieceNameToId(lights, light);
+    const mappedSpoilerId = mapPieceNameToId(spoilers, spoiler);
+    const mappedSideskirtId = mapPieceNameToId(sideskirts, sideskirt);
+  
+    const mappedCarData = {
+      name,
+      color,
+      horn,
+      wheel: mappedWheelId,
+      engine: mappedEngineId,
+      suspension: mappedSuspensionId,
+      brake: mappedBrakeId,
+      exhaustpipe: mappedExhaustpipeId,
+      light: mappedLightId,
+      spoiler: mappedSpoilerId,
+      sideskirt: mappedSideskirtId
+    };
+  
+    try {
+      const response = await dispatch(createCar(mappedCarData));
+      if (response && response.success !== undefined) {
+        if (response.success) {
+          console.log('Car created successfully!');
+        } else {
+          console.error('Failed to create car:', response);
+        }
+      } else {
+        console.error('Failed to create car: Invalid response format');
+      }
+    } catch (error) {
+      console.error('Failed to create car:', error.message);
+    }
+  };
+  
+
 
   return (
     <>
@@ -62,14 +122,26 @@ export function ProjectAdd({ wheels, engines, suspensions, brakes, exhaustpipes,
       </section>
       <div className="container mx-auto py-12">
         <h1 className="text-3xl font-bold mb-8">Crear Proyecto</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form className="space-y-4">
           <div className="flex flex-col">
             <label className="text-sm text-gray-900 font-light">Nombre:</label>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="input" />
           </div>
           <div className="flex flex-col">
             <label className="text-sm text-gray-900 font-light">Color:</label>
-            <input type="text" value={color} onChange={(e) => setColor(e.target.value)} className="input" />
+            <div className="relative">
+              <input
+                type="text"
+                value={color}
+                onClick={() => setShowColorPicker(!showColorPicker)}
+                className="input"
+              />
+              {showColorPicker && (
+                <div className="absolute top-[calc(100%+5px)] left-0">
+                  <ChromePicker color={color} onChange={handleChangeColor} />
+                </div>
+              )}
+            </div>
           </div>
           <div className="flex flex-col">
             <label className="text-sm text-gray-900 font-light">Bozina:</label>
@@ -131,9 +203,12 @@ export function ProjectAdd({ wheels, engines, suspensions, brakes, exhaustpipes,
               {sideskirts && sideskirts.map(sideskirt => <option key={sideskirt.id} value={sideskirt.id}>{sideskirt.material}</option>)}
             </select>
           </div>
-          <button type="submit" className="btn">Crear Proyecto</button>
+          <button type="submit" className="btn" onClick={handleSubmit}>Crear Proyecto</button>
         </form>
       </div>
+      <br />
+      <br />
+
       <div className="bg-white fixed bottom-0 left-0 right-0">
         <Footer />
       </div>
