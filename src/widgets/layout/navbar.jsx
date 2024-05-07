@@ -26,6 +26,12 @@ export function Navbar({ brandName, routes, action }) {
     navigate("/");
   };
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <>
       <nav className="px-4 p-4">
@@ -38,13 +44,20 @@ export function Navbar({ brandName, routes, action }) {
                 alt="Brand Logo"
               ></img>
             </Link>
-            <div className="pl-9 text-white ">
+            <div className={`pl-9 text-white hidden lg:flex lg:items-center lg:space-x-4 ${menuOpen ? 'hidden' : 'block'}`}>
               <Link to="/project" className="mr-4">Proyectos </Link>
               <Link to="/community" className="mr-4">Comunidad </Link>
               <Link to="/chat" className="mr-4">Chat </Link>
               <Link to="/contact" className="mr-4">Contacto </Link>
               <Link to="/prueba" className="mr-4">Prueba </Link>
             </div>
+          </div>
+          <div className="lg:hidden">
+            <button onClick={toggleMenu} className="focus:outline-none">
+              <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+              </svg>
+            </button>
           </div>
           {authToken ? (
             <div>
@@ -61,6 +74,15 @@ export function Navbar({ brandName, routes, action }) {
           )}
         </div>
       </nav>
+      <div className={`lg:hidden absolute top-16 right-0 left-0 bg-black bg-opacity-90 ${menuOpen ? 'block' : 'hidden'}`}>
+        <div className="flex flex-col items-center py-4 space-y-4">
+          <Link to="/project" className="text-white">Proyectos </Link>
+          <Link to="/community" className="text-white">Comunidad </Link>
+          <Link to="/chat" className="text-white">Chat </Link>
+          <Link to="/contact" className="text-white">Contacto </Link>
+          <Link to="/prueba" className="text-white">Prueba </Link>
+        </div>
+      </div>
     </>
   );
 }

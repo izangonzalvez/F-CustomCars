@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { showCars } from '@/slices/car/thunks';
 import { Footer } from "@/widgets/layout";
+import PDFButton from './PDFButton';
 
 export function ProjectShow() {
   const { projectId } = useParams();
@@ -29,6 +30,8 @@ export function ProjectShow() {
       <div className="container mx-auto py-12 flex">
         <div className="w-1/2 pr-4 overflow-y-auto">
           <h1 className="text-3xl font-bold mb-8">Detalles del Proyecto</h1>
+          {!isLoading && car && <PDFButton car={car} />}
+          <br/><br/>
           {isLoading ? (
             <p>Cargando...</p>
           ) : car ? (
@@ -73,6 +76,7 @@ export function ProjectShow() {
               </TableRowGroup>
               <TableRowGroup title="Taloneras">
                 <TableRow title="Material" value={car.sideskirt.material} />
+                <TableRow title="Tamaño" value={car.sideskirt.size} />
                 <TableRow title="Tamaño" value={car.sideskirt.size} />
               </TableRowGroup> 
               </tbody>
