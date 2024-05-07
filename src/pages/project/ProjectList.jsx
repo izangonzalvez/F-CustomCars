@@ -8,6 +8,7 @@ export function ProjectList() {
   const { usuari, authToken } = useSelector(state => state.auth);
   const { cars } = useSelector(state => state.cars);
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(listCars(authToken));
   }, []);

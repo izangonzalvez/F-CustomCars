@@ -1,4 +1,4 @@
-import { Home, Profile, ProjectList, ProjectAdd,Community, Chat,Login, Register, Contact, Car } from "@/pages";
+import { Home, Profile, ProjectList, ProjectAdd, Chat,Login, Register, Contact, Car, Community } from "@/pages";
 import ProjectShow from "./pages/project/ProjectShow";
 
 export const routes = [
