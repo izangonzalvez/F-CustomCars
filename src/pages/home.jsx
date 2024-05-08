@@ -13,6 +13,7 @@ import {
 import { FingerPrintIcon, UsersIcon } from "@heroicons/react/24/solid";
 import { PageTitle, Footer } from "@/widgets/layout";
 import { FeatureCard, TeamCard } from "@/widgets/cards";
+import { Link } from 'react-router-dom';
 import { featuresData, teamData, contactData } from "@/data";
 
 export function Home() {
@@ -38,6 +39,9 @@ export function Home() {
                 Material Tailwind. It features multiple components based on the
                 Tailwind CSS and Material Design by Google.
               </Typography> */}
+              <Link to="/project" className="bg-transparent hover:bg-yellow-500 text-white font-semibold hover:text-black py-2 px-4 border border-white hover:border-transparent rounded">
+                Empieza con el tuyo
+              </Link>
             </div>
           </div>
         </div>
