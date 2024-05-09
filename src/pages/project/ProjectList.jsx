@@ -1,5 +1,3 @@
-// ProjectList.jsx
-
 import { Link } from 'react-router-dom';
 import { Footer } from "@/widgets/layout";
 import { useDispatch, useSelector } from 'react-redux';
@@ -62,7 +60,7 @@ export function ProjectList() {
                   <Link to={`/project/${car.id}`} className="text-cyan-600">👁️</Link>
                   <button onClick={() => deleteCar(car.id)} className="text-red-600">🗑️</button>
                   <Link to={`/project/${car.id}/edit`} className="text-yellow-600">🖊️</Link>
-                  <button onClick={() => publishCar(car.id, !car.post)} className="text-red-600">{car.post ? 'Publicado' : 'Publicar'}</button>
+                  <button onClick={() => publishCar(car.id, !car.post)} className={car.post ? 'text-green-600' : 'text-red-600'}>{car.post ? 'Publicado' : 'Publicar'}</button>
                 </div>
               </div>
             )).filter(car => car.user_id === userId)
