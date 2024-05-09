@@ -47,7 +47,6 @@ export function ProjectAdd() {
   };
 
   useEffect(() => {
-    // Despachando las acciones para cargar los datos al montar el componente
     dispatch(listWheels());
     dispatch(listEngines());
     dispatch(listSuspensions());
@@ -69,53 +68,6 @@ export function ProjectAdd() {
     console.log("Spoilers:", spoilers);
     console.log("Sideskirts:", sideskirts);
   }, [wheels, engines, suspensions, brakes, exhaustpipes, lights, spoilers, sideskirts]);
-
-  // const mapPieceNameToId = (pieces, selectedPieceName) => {
-  //   const selectedPiece = pieces.find(piece => piece.name === selectedPieceName);
-  //   return selectedPiece ? selectedPiece.id : ''; 
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  
-  //   const mappedWheelId = mapPieceNameToId(wheels, wheel);
-  //   const mappedEngineId = mapPieceNameToId(engines, engine);
-  //   const mappedSuspensionId = mapPieceNameToId(suspensions, suspension);
-  //   const mappedBrakeId = mapPieceNameToId(brakes, brake);
-  //   const mappedExhaustpipeId = mapPieceNameToId(exhaustpipes, exhaustpipe);
-  //   const mappedLightId = mapPieceNameToId(lights, light);
-  //   const mappedSpoilerId = mapPieceNameToId(spoilers, spoiler);
-  //   const mappedSideskirtId = mapPieceNameToId(sideskirts, sideskirt);
-  
-  //   const mappedCarData = {
-  //     name,
-  //     color,
-  //     horn,
-  //     wheel: mappedWheelId,
-  //     engine: mappedEngineId,
-  //     suspension: mappedSuspensionId,
-  //     brake: mappedBrakeId,
-  //     exhaustpipe: mappedExhaustpipeId,
-  //     light: mappedLightId,
-  //     spoiler: mappedSpoilerId,
-  //     sideskirt: mappedSideskirtId
-  //   };
-  
-  //   try {
-  //     const response = await dispatch(createCar(mappedCarData));
-  //     if (response && response.success !== undefined) {
-  //       if (response.success) {
-  //         console.log('Car created successfully!');
-  //       } else {
-  //         console.error('Failed to create car:', response);
-  //       }
-  //     } else {
-  //       console.error('Failed to create car: Invalid response format');
-  //     }
-  //   } catch (error) {
-  //     console.error('Failed to create car:', error.message);
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -153,8 +105,6 @@ export function ProjectAdd() {
 
   };
   
-
-
   return (
     <>
       <section className="relative block h-[18vh]">
