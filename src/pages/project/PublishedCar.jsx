@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import { Footer } from "@/widgets/layout";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { listCars,  deleteCar as deleteCarAction } from '@/slices/car/thunks';
+import { listCars, deleteCar as deleteCarAction } from '@/slices/car/thunks';
+import FloatingChatButton from '../chat/FloatingChatButton';
 
 export function PublishedCar() {
-  const { userId, authToken } = useSelector(state => state.auth);
+  const { usuario, authToken } = useSelector(state => state.auth);
   const { cars } = useSelector(state => state.cars);
   const dispatch = useDispatch();
   
@@ -15,7 +16,7 @@ export function PublishedCar() {
 
   const deleteCar = (carId) => {
     dispatch(deleteCarAction(carId, authToken));
-    dispatch(listCars(userId, authToken));
+    dispatch(listCars(authToken));
   };
 
   return (
@@ -30,8 +31,8 @@ export function PublishedCar() {
           {cars ? (
             cars.map(car => (
               car.post && (
-                <div key={car.id} className="bo rder rounded-lg shadow-md p-4 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
-                  <div className="flex flex-col">
+                <div key={car.id} className="border rounded-lg shadow-md transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 bg-white relative">
+                  <div className="p-4">
                     <div className="text-lg font-semibold mb-2">{car.name}</div>
                     <div className="flex flex-col gap-2">
                       <div><span className="font-semibold">Color:</span> {car.color}</div>
@@ -46,9 +47,10 @@ export function PublishedCar() {
                       <div><span className="font-semibold">Taloneras:</span> {car.sideskirt.material}</div>
                     </div>
                   </div>
-                  <div className="flex justify-between mt-4">
+                  <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-b-lg"></div>
+                  <div className="flex justify-between mt-4 p-4">
                     <Link to={`/project/${car.id}`} className="text-cyan-600">👁️</Link>
-                    <button onClick={() => deleteCar(car.id)} className="text-red-600">Despublicar</button>
+                    <button onClick={() => deleteCar(car.id)} className="text-red-600">🗑️</button>
                   </div>
                 </div>
               )
@@ -58,8 +60,8 @@ export function PublishedCar() {
           )}
         </div>
       </div>
-      <br/><br/>
-      <div className="fixed bottom-0 left-0 right-0">
+      <FloatingChatButton />
+      <div className="bg-white">
         <Footer />
       </div>
     </>
