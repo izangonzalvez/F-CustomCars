@@ -197,10 +197,8 @@ export function ProjectAdd() {
           <button type="submit" className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg" onClick={handleSubmit}>Crear Proyecto</button>
         </form>
       </div>
-      <br />
-      <br />
 
-      <div className="bg-white fixed bottom-0 left-0 right-0">
+      <div className="bg-white">
         <Footer />
       </div>
     </>

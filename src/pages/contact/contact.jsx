@@ -7,6 +7,7 @@ import {
 import { Footer, PageTitle } from "@/widgets/layout";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import "leaflet/dist/leaflet.css"
+import FloatingChatButton from "../chat/FloatingChatButton";
 
 export function Contact() {
   const position = [41.2298, 1.7075];
@@ -70,6 +71,7 @@ export function Contact() {
             </div>
         </div>
       </section>
+      <FloatingChatButton />
       <div className="bg-white">
         <Footer />
       </div>

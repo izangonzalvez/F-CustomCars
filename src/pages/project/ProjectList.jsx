@@ -3,6 +3,7 @@ import { Footer } from "@/widgets/layout";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { listCars, deleteCar as deleteCarAction, publishCar as publishCarAction } from '@/slices/car/thunks';
+import FloatingChatButton from '../chat/FloatingChatButton';
 
 export function ProjectList() {
   const { userId, authToken } = useSelector(state => state.auth);
@@ -40,9 +41,10 @@ export function ProjectList() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {cars ? (
             cars.map(car => (
-              <div key={car.id} className="border rounded-lg shadow-md p-4 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+              <div key={car.id} className="border rounded-lg shadow-md p-4 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 bg-white relative">
                 <div className="flex flex-col">
                   <div className="text-lg font-semibold mb-2">{car.name}</div>
+                  <hr className="my-4 border-t border-gray-300" />
                   <div className="flex flex-col gap-2">
                     <div><span className="font-semibold">Color:</span> {car.color}</div>
                     <div><span className="font-semibold">Bozina:</span> {car.horn}</div>
@@ -57,11 +59,16 @@ export function ProjectList() {
                   </div>
                 </div>
                 <div className="flex justify-between mt-4">
-                  <Link to={`/project/${car.id}`} className="text-cyan-600">👁️</Link>
-                  <button onClick={() => deleteCar(car.id)} className="text-red-600">🗑️</button>
-                  <Link to={`/project/${car.id}/edit`} className="text-yellow-600">🖊️</Link>
-                  <button onClick={() => publishCar(car.id, !car.post)} className={car.post ? 'text-green-600' : 'text-red-600'}>{car.post ? 'Publicado' : 'Publicar'}</button>
+                  <div className="flex items-center space-x-2">
+                    <Link to={`/project/${car.id}`} className="text-cyan-600">👁️</Link>
+                    <Link to={`/project/${car.id}/edit`} className="text-yellow-600">🖊️</Link>
+                    <button onClick={() => deleteCar(car.id)} className="text-red-600">🗑️</button>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <button onClick={() => publishCar(car.id, !car.post)} className={car.post ? 'text-green-600' : 'text-red-600'}>{car.post ? 'Publicado' : 'Publicar'}</button>
+                  </div>
                 </div>
+                <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-b-lg"></div>
               </div>
             )).filter(car => car.user_id === userId)
           ) : (
@@ -69,8 +76,8 @@ export function ProjectList() {
           )}
         </div>
       </div>
-      <br/><br/>
-      <div className="fixed bottom-0 left-0 right-0">
+      <FloatingChatButton />
+      <div className="bg-white">
         <Footer />
       </div>
     </>
