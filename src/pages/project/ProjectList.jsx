@@ -14,9 +14,10 @@ export function ProjectList() {
   useEffect(() => {
     dispatch(listCars(userId, authToken));
   }, [userId, authToken]);
-  
+
   const deleteCar = (carId) => {
     dispatch(deleteCarAction(carId, authToken));
+    dispatch(listCars(userId, authToken));
   };
 
   const publishCar = (carId, post) => {

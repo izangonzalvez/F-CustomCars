@@ -96,7 +96,7 @@ export const deleteCar = (carId, authToken) => {
         const responseData = await response.json();
   
         if (responseData.success === true) {
-          dispatch(setCars(responseData.data));
+          dispatch(listCars(authToken))
           dispatch(setAuthToken(responseData.authToken));
         } else {
           dispatch(setError(responseData));

@@ -2,16 +2,21 @@ import { Link } from 'react-router-dom';
 import { Footer } from "@/widgets/layout";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { listCars } from '@/slices/car/thunks';
+import { listCars,  deleteCar as deleteCarAction } from '@/slices/car/thunks';
 
 export function PublishedCar() {
-  const { usuari, authToken } = useSelector(state => state.auth);
+  const { userId, authToken } = useSelector(state => state.auth);
   const { cars } = useSelector(state => state.cars);
   const dispatch = useDispatch();
   
   useEffect(() => {
     dispatch(listCars(authToken));
   }, []);
+
+  const deleteCar = (carId) => {
+    dispatch(deleteCarAction(carId, authToken));
+    dispatch(listCars(userId, authToken));
+  };
 
   return (
     <>
@@ -43,6 +48,7 @@ export function PublishedCar() {
                   </div>
                   <div className="flex justify-between mt-4">
                     <Link to={`/project/${car.id}`} className="text-cyan-600">👁️</Link>
+                    <button onClick={() => deleteCar(car.id)} className="text-red-600">Despublicar</button>
                   </div>
                 </div>
               )
