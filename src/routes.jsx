@@ -1,6 +1,7 @@
 import { Home, Profile, ProjectList, ProjectAdd, Chat,Login, Register, Contact, Car, Community } from "@/pages";
 import ProjectShow from "./pages/project/ProjectShow";
 import PublishedCar from "./pages/project/PublishedCar";
+import RegisterProvider from "./pages/proveedor/RegisterProveedor";
 
 export const routes = [
   {
@@ -58,6 +59,11 @@ export const routes = [
     path: "/prueba",
     element: <Car />,
   },
+  {
+    name: "Proveedor",
+    path: "/proveedor",
+    element: <RegisterProvider />,
+  }
 ];
 
 export default routes;
