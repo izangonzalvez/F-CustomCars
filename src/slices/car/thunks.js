@@ -18,6 +18,7 @@ export const listCars = (authToken) => {
 
         if (response.success == true) {
             dispatch(setCars(response.data));
+          
             dispatch(setAuthToken(response.authToken));
         } else {
             dispatch(setError(response))
@@ -42,7 +43,7 @@ export const createCar = (carData, authToken) => {
             const responseData = await response.json();
 
             if (responseData.success === true) {
-                dispatch(setCars(responseData.data));
+                dispatch(listCars(authToken))
                 dispatch(setAuthToken(responseData.authToken));
             } else {
                 dispatch(setError(responseData));
@@ -105,3 +106,30 @@ export const deleteCar = (carId, authToken) => {
       }
     };
   };
+
+  export const publishCar = (carId, authToken) => {
+    return async (dispatch) => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/cars/${carId}/publish`, {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+          body: JSON.stringify({ post: true }),
+        });
+        const responseData = await response.json();
+        if (responseData.success === true) {
+        //   dispatch(setCars(responseData.data));
+            dispatch(listCars(authToken))
+           dispatch(setAuthToken(responseData.authToken));
+        } else {
+          dispatch(setError(responseData));
+        }
+      } catch (error) {
+        dispatch(setError(error.message));
+      }
+    };
+  };
+  
