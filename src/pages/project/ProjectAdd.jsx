@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChromePicker } from 'react-color';
-import { createCar } from '@/slices/car/thunks';
+import { createCar, listCars } from '@/slices/car/thunks';
 import { listWheels } from '@/slices/wheel/thunks';
 import { listEngines } from '@/slices/engine/thunks';
 import { listSuspensions } from '@/slices/suspension/thunks';
@@ -11,12 +11,15 @@ import { listLights } from '@/slices/light/thunks';
 import { listSpoilers } from '@/slices/spoiler/thunks';
 import { listSideskirts } from '@/slices/sideskirt/thunks';
 import { Footer } from '@/widgets/layout';
+import { redirect, useNavigate } from 'react-router-dom';
 
 export function ProjectAdd() {
   const dispatch = useDispatch();
   const post = 0
   const user_id = 1;
+  const { usuari, authToken } = useSelector(state => state.auth);
 
+  // Utilizando useSelector para obtener los datos del estado de Redux
   const wheels = useSelector(state => state.wheels.wheels);
   const engines = useSelector(state => state.engines.engines);
   const suspensions = useSelector(state => state.suspensions.suspensions);
@@ -37,7 +40,7 @@ export function ProjectAdd() {
   const [light, setLight] = useState('');
   const [spoiler, setSpoiler] = useState('');
   const [sideskirt, setSideskirt] = useState('');
-
+  const navigate = useNavigate();
   const [showColorPicker, setShowColorPicker] = useState(false);
   const handleChangeColor = (newColor) => {
     setColor(newColor.hex);
@@ -52,6 +55,7 @@ export function ProjectAdd() {
     dispatch(listLights());
     dispatch(listSpoilers());
     dispatch(listSideskirts());
+    dispatch(listCars(authToken));
   }, [dispatch]);
 
   useEffect(() => {
@@ -86,9 +90,11 @@ export function ProjectAdd() {
 
     try {
       const response = await dispatch(createCar(carData));
-    
-      if (response && response.success) {
+      navigate("/project")
+
+      if (response) {
         console.log('Car created successfully!');
+        navigate("/project")
       } else {
         console.error('Failed to create car:', response);
       }
@@ -96,6 +102,7 @@ export function ProjectAdd() {
     } catch (error) {
       console.error('Failed to create car:', error.message);
     }
+
   };
   
   return (
@@ -187,7 +194,7 @@ export function ProjectAdd() {
               {sideskirts && sideskirts.map(sideskirt => <option key={sideskirt.id} value={sideskirt.id}>{sideskirt.material}</option>)}
             </select>
           </div>
-          <button type="submit" className="btn" onClick={handleSubmit}>Crear Proyecto</button>
+          <button type="submit" className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg" onClick={handleSubmit}>Crear Proyecto</button>
         </form>
       </div>
       <br />

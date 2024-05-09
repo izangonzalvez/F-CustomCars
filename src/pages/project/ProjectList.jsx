@@ -1,22 +1,26 @@
-import { Link, redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Footer } from "@/widgets/layout";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { listCars, deleteCar as deleteCarAction } from '@/slices/car/thunks';
+import { useEffect } from 'react';
+import { listCars, deleteCar as deleteCarAction, publishCar as publishCarAction } from '@/slices/car/thunks';
 
 export function ProjectList() {
-  const { usuari, authToken } = useSelector(state => state.auth);
+  const { userId, authToken } = useSelector(state => state.auth);
   const { cars } = useSelector(state => state.cars);
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(listCars(authToken));
-  }, []);
+    dispatch(listCars(userId, authToken));
+  }, [userId, authToken]);
 
   const deleteCar = (carId) => {
     dispatch(deleteCarAction(carId, authToken));
-    dispatch(listCars(authToken));
+    dispatch(listCars(userId, authToken));
   };
+
+  const publishCar = (carId, post) => {
+    dispatch(publishCarAction(carId, authToken, post));
+  }
 
   return (
     <>
@@ -56,9 +60,10 @@ export function ProjectList() {
                   <Link to={`/project/${car.id}`} className="text-cyan-600">👁️</Link>
                   <button onClick={() => deleteCar(car.id)} className="text-red-600">🗑️</button>
                   <Link to={`/project/${car.id}/edit`} className="text-yellow-600">🖊️</Link>
+                  <button onClick={() => publishCar(car.id, !car.post)} className={car.post ? 'text-green-600' : 'text-red-600'}>{car.post ? 'Publicado' : 'Publicar'}</button>
                 </div>
               </div>
-            ))
+            )).filter(car => car.user_id === userId)
           ) : (
             <p className="text-center">Cargando...</p>
           )}
