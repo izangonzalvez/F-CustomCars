@@ -6,17 +6,18 @@ import { listCars, deleteCar as deleteCarAction, publishCar as publishCarAction 
 import FloatingChatButton from '../chat/FloatingChatButton';
 
 export function ProjectList() {
-  const { userId, authToken } = useSelector(state => state.auth);
+  const { authToken } = useSelector(state => state.auth);
   const { cars } = useSelector(state => state.cars);
+  console.log((cars))
   const dispatch = useDispatch();
-  
+  const email = localStorage.getItem("user")
   useEffect(() => {
-    dispatch(listCars(userId, authToken));
-  }, [userId, authToken]);
+    dispatch(listCars(authToken, email));
+  }, [authToken]);
 
   const deleteCar = (carId) => {
     dispatch(deleteCarAction(carId, authToken));
-    dispatch(listCars(userId, authToken));
+    dispatch(listCars(authToken, email));
   };
 
   const publishCar = (carId, post) => {
@@ -70,7 +71,7 @@ export function ProjectList() {
                 </div>
                 <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-b-lg"></div>
               </div>
-            )).filter(car => car.user_id === userId)
+            ))
           ) : (
             <p className="text-center">Cargando...</p>
           )}

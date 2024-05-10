@@ -16,10 +16,8 @@ import { redirect, useNavigate } from 'react-router-dom';
 export function ProjectAdd() {
   const dispatch = useDispatch();
   const post = 0
-  const user_id = 1;
   const { usuari, authToken } = useSelector(state => state.auth);
 
-  // Utilizando useSelector para obtener los datos del estado de Redux
   const wheels = useSelector(state => state.wheels.wheels);
   const engines = useSelector(state => state.engines.engines);
   const suspensions = useSelector(state => state.suspensions.suspensions);
@@ -28,6 +26,7 @@ export function ProjectAdd() {
   const lights = useSelector(state => state.lights.lights);
   const spoilers = useSelector(state => state.spoilers.spoilers);
   const sideskirts = useSelector(state => state.sideskirts.sideskirts);
+  const email = localStorage.getItem('user');
 
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
@@ -85,7 +84,7 @@ export function ProjectAdd() {
       spoiler,
       sideskirt,
       post,
-      user_id
+      email
     };
 
     try {

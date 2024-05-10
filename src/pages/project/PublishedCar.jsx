@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Footer } from "@/widgets/layout";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { listCars, deleteCar as deleteCarAction } from '@/slices/car/thunks';
+import { listCars, deleteCar as deleteCarAction, listPublished } from '@/slices/car/thunks';
 import FloatingChatButton from '../chat/FloatingChatButton';
 
 export function PublishedCar() {
@@ -11,12 +11,12 @@ export function PublishedCar() {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(listCars(authToken));
+    dispatch(listPublished(authToken));
   }, []);
 
   const deleteCar = (carId) => {
     dispatch(deleteCarAction(carId, authToken));
-    dispatch(listCars(authToken));
+    dispatch(listPublished(authToken));
   };
 
   return (

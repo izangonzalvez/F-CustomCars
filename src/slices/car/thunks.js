@@ -1,10 +1,9 @@
 import { set } from "react-hook-form";
 import { setLoading,setCar, setCars, setIgame, setAuthToken, setError} from "./carSlices";
 
-export const listCars = (authToken) => {
+export const listCars = (authToken, email) => {
     return async (dispatch, getState) => {
-        console.log(authToken);
-        const data = await fetch("http://127.0.0.1:8000/api/cars", {
+        const data = await fetch("http://127.0.0.1:8000/api/cars/projects/"+email, {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -12,9 +11,7 @@ export const listCars = (authToken) => {
             },
             method: "GET",
         });
-
         const response = await data.json();
-
         if (response.success == true) {
             dispatch(setCars(response.data));
           
@@ -65,7 +62,6 @@ export const showCars = (carId, authToken) => {
               },
               method: "GET",
           });
-
           const responseData = await response.json();
 
           if (responseData.success === true) {
@@ -132,6 +128,29 @@ export const deleteCar = (carId, authToken) => {
       }
     };
   };
+
+  export const listPublished = (authToken, email) => {
+    return async (dispatch, getState) => {
+        const data = await fetch("http://127.0.0.1:8000/api/cars/", {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authToken}`,
+            },
+            method: "GET",
+        });
+        const response = await data.json();
+        if (response.success == true) {
+            dispatch(setCars(response.data));
+          
+            dispatch(setAuthToken(response.authToken));
+        } else {
+            dispatch(setError(response))
+        }
+
+    }
+}
+
   export const updateCar = (carId, carData, authToken) => {
     console.log(carId)
     console.log(carData)

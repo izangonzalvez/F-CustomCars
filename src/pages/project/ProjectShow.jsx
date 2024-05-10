@@ -6,7 +6,7 @@ import { Footer } from "@/widgets/layout";
 import PDFButton from './PDFButton';
 
 export function ProjectShow() {
-  const { carId } = useParams();
+  const { projectId } = useParams();
   const { authToken } = useSelector(state => state.auth);
   const { car, isLoading } = useSelector(state => state.cars);
   const dispatch = useDispatch();
@@ -15,7 +15,6 @@ export function ProjectShow() {
     dispatch(showCars(projectId, authToken));
   }, [dispatch, projectId, authToken]);
 
-  // Verificar el objeto car y el estado de carga
   console.log("Car object:", car);
   console.log("isLoading:", isLoading);
 
