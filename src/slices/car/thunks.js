@@ -4,7 +4,6 @@ import { setLoading,setCar, setCars, setIgame, setAuthToken, setError} from "./c
 export const listCars = (authToken) => {
     return async (dispatch, getState) => {
         console.log(authToken);
-
         const data = await fetch("http://127.0.0.1:8000/api/cars", {
             headers: {
                 Accept: "application/json",
@@ -108,6 +107,7 @@ export const deleteCar = (carId, authToken) => {
   };
 
   export const publishCar = (carId, authToken) => {
+    console.log(carId)
     return async (dispatch) => {
       try {
         const response = await fetch(`http://127.0.0.1:8000/api/cars/${carId}/publish`, {
@@ -132,4 +132,32 @@ export const deleteCar = (carId, authToken) => {
       }
     };
   };
-  
+  export const updateCar = (carId, carData, authToken) => {
+    console.log(carId)
+    console.log(carData)
+    console.log(authToken)
+    return async (dispatch) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/cars/${carId}`, {
+                method: "PUT",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${authToken}`,
+                },
+                body: JSON.stringify(carData),
+            });
+
+            const responseData = await response.json();
+
+            if (responseData.success === true) {
+                dispatch(listCars(authToken));
+                dispatch(setAuthToken(responseData.authToken));
+            } else {
+                dispatch(setError(responseData));
+            }
+        } catch (error) {
+            dispatch(setError(error.message));
+        }
+    };
+};

@@ -1,7 +1,8 @@
-import { Home, Profile, ProjectList, ProjectAdd, Chat,Login, Register, Contact, Car, Community } from "@/pages";
+import { Home, Profile, ProjectList, ProjectAdd,Login, Register, Contact, Car } from "@/pages";
 import ProjectShow from "./pages/project/ProjectShow";
 import PublishedCar from "./pages/project/PublishedCar";
 import RegisterProvider from "./pages/proveedor/RegisterProveedor";
+import ProjectEdit from "./pages/project/ProjectEdit";
 
 export const routes = [
   {
@@ -28,11 +29,6 @@ export const routes = [
     name: "Comunidad",
     path: "/community",
     element: <PublishedCar />,
-  },
-  {
-    name: "Chat",
-    path: "/chat",
-    element: <Chat />,
   },
   {
     name: "Contacto",
@@ -63,6 +59,11 @@ export const routes = [
     name: "Proveedor",
     path: "/proveedor",
     element: <RegisterProvider />,
+  },
+  {
+    name: "Proyectos Edit",
+    path: "/project/:projectId/edit",
+    element: <ProjectEdit />,
   }
 ];
 

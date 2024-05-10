@@ -6,7 +6,7 @@ import { Footer } from "@/widgets/layout";
 import PDFButton from './PDFButton';
 
 export function ProjectShow() {
-  const { projectId } = useParams();
+  const { carId } = useParams();
   const { authToken } = useSelector(state => state.auth);
   const { car, isLoading } = useSelector(state => state.cars);
   const dispatch = useDispatch();
