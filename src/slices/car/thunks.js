@@ -14,7 +14,6 @@ export const listCars = (authToken, email) => {
         const response = await data.json();
         if (response.success == true) {
             dispatch(setCars(response.data));
-          
             dispatch(setAuthToken(response.authToken));
         } else {
             dispatch(setError(response))
@@ -103,7 +102,6 @@ export const deleteCar = (carId, authToken) => {
   };
 
   export const publishCar = (carId, authToken) => {
-    console.log(carId)
     return async (dispatch) => {
       try {
         const response = await fetch(`http://127.0.0.1:8000/api/cars/${carId}/publish`, {
@@ -142,7 +140,6 @@ export const deleteCar = (carId, authToken) => {
         const response = await data.json();
         if (response.success == true) {
             dispatch(setCars(response.data));
-          
             dispatch(setAuthToken(response.authToken));
         } else {
             dispatch(setError(response))

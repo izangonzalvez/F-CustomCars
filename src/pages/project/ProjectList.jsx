@@ -8,7 +8,6 @@ import FloatingChatButton from '../chat/FloatingChatButton';
 export function ProjectList() {
   const { authToken } = useSelector(state => state.auth);
   const { cars } = useSelector(state => state.cars);
-  console.log((cars))
   const dispatch = useDispatch();
   const email = localStorage.getItem("user")
   useEffect(() => {
@@ -22,6 +21,7 @@ export function ProjectList() {
 
   const publishCar = (carId, post) => {
     dispatch(publishCarAction(carId, authToken, post));
+    dispatch(listCars(authToken, email));
   }
 
   return (

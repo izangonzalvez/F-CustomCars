@@ -54,7 +54,7 @@ export function ProjectAdd() {
     dispatch(listLights());
     dispatch(listSpoilers());
     dispatch(listSideskirts());
-    dispatch(listCars(authToken));
+    dispatch(listCars(authToken, email));
   }, [dispatch]);
 
   useEffect(() => {

@@ -16,7 +16,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 function ProjectEdit() {
   const { projectId } = useParams();
   const dispatch = useDispatch();
-  const user_id = 1;
   const { authToken } = useSelector(state => state.auth);
 
   const wheels = useSelector(state => state.wheels.wheels);
@@ -27,6 +26,7 @@ function ProjectEdit() {
   const lights = useSelector(state => state.lights.lights);
   const spoilers = useSelector(state => state.spoilers.spoilers);
   const sideskirts = useSelector(state => state.sideskirts.sideskirts);
+  const email = localStorage.getItem('user');
 
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
@@ -73,7 +73,7 @@ function ProjectEdit() {
       light,
       spoiler,
       sideskirt,
-      user_id
+      email
     };
 
     try {
