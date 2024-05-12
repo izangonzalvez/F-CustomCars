@@ -15,6 +15,7 @@ import { PageTitle, Footer } from "@/widgets/layout";
 import { FeatureCard, TeamCard } from "@/widgets/cards";
 import { Link } from 'react-router-dom';
 import { featuresData, teamData, contactData } from "@/data";
+import FloatingChatButton from "./chat/FloatingChatButton";
 
 export function Home() {
   return (
@@ -119,6 +120,7 @@ export function Home() {
             </Button>
           </form>
         </div>
+      <FloatingChatButton />
       <div className="bg-white">
         <Footer />
       </div>

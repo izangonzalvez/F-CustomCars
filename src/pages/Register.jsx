@@ -139,6 +139,10 @@
                 Ya tienes una cuenta?
                 <Link to="/login" className="text-gray-900 ml-1">Sign in</Link>
               </Typography>
+              <Typography variant="paragraph" className="text-center text-blue-gray-500 font-medium mt-4">
+                Eres un proveedor?
+                <Link to="/proveedorRegister" className="text-gray-900 ml-1">Sign in</Link>
+              </Typography>
             </form>
 
           </div>

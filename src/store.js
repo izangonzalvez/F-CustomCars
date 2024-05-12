@@ -23,6 +23,6 @@ export const store = configureStore({
       lights: lightReducers,
       spoilers: spoilerReducers,
       sideskirts: sideskirtReducers,
-      proveedor: proveedorReducers,
+      proveedors: proveedorReducers,
     },
 });

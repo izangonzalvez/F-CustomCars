@@ -48,9 +48,6 @@ const FloatingChatButton = () => {
         <div className="bg-white rounded-lg shadow-md w-96">
           <div className="flex justify-between bg-blue-500 text-white p-2 rounded-t-lg">
             <span>ChatBot</span>
-            <button onClick={handleClearChat} className="text-red-500">
-              <FontAwesomeIcon icon={faTrashAlt} />
-            </button>
             <button onClick={handleShowQuestions} className="bg-green-500 text-white px-4 py-2 rounded-full">
               Preguntas
             </button>
@@ -64,6 +61,9 @@ const FloatingChatButton = () => {
             <div ref={messagesEndRef} />
           </div>
           <div className="flex p-4 bg-gray-100">
+            <button onClick={handleClearChat} className="text-red-500">
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </button>
             <input
               type="text"
               placeholder="Escribe un mensaje..."

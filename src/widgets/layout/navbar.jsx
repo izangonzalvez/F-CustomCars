@@ -50,8 +50,6 @@ export function Navbar({ brandName, routes, action }) {
               <Link to="/chat" className="mr-4">Chat </Link>
               <Link to="/contact" className="mr-4">Contacto </Link>
               <Link to="/prueba" className="mr-4">Prueba </Link>
-              <Link to="/proveedor" className="mr-4">Proveedor</Link>
-
             </div>
           </div>
           <div className="lg:hidden">
