@@ -15,7 +15,6 @@ export function ProjectShow() {
     dispatch(showCars(projectId, authToken));
   }, [dispatch, projectId, authToken]);
 
-  // Verificar el objeto car y el estado de carga
   console.log("Car object:", car);
   console.log("isLoading:", isLoading);
 

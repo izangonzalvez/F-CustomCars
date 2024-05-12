@@ -17,13 +17,11 @@ export function Car() {
       renderer.setSize(window.innerWidth, window.innerHeight);
       mountRef.current.appendChild(renderer.domElement);
 
-      // Ajustar la posición de la cámara para que el modelo se vea desde la posición deseada
       camera.position.set(10, 5, 10);
-      camera.lookAt(new THREE.Vector3(5, 0, 0)); // Mirando hacia la derecha
+      camera.lookAt(new THREE.Vector3(5, 0, 0));
 
       controls = new OrbitControls(camera, renderer.domElement);
       
-      // Ajustar la velocidad de los controles orbitales
       controls.rotateSpeed = 0.5;
       controls.zoomSpeed = 1.2;
       controls.panSpeed = 0.8;
@@ -33,9 +31,8 @@ export function Car() {
       if (!modelLoaded) {
         const loader = new OBJLoader();
         loader.load(
-          '/3d/PorscheGT2.obj',
+          '/3d/bugatti.obj',
           function (object) {
-            // Iterar sobre las partes del modelo y asignar el material según el nombre
             object.traverse(function (child) {
               if (child instanceof THREE.Mesh) {
                 const material = getMaterialByPartName(child.name);
@@ -43,7 +40,7 @@ export function Car() {
               }
             });
             scene.add(object);
-            setModelLoaded(true); // Marcar el modelo como cargado
+            setModelLoaded(true);
           },
           function (xhr) {
             console.log((xhr.loaded / xhr.total * 100) + '% loaded');
@@ -56,13 +53,12 @@ export function Car() {
     }
 
     function getMaterialByPartName(partName) {
-      // Asignar materiales diferentes según el nombre de la parte del modelo
       if (partName.includes('wheel')) {
-        return new THREE.MeshBasicMaterial({ color: 0x000000 }); // Ruedas en negro
+        return new THREE.MeshBasicMaterial({ color: 0x000000 });
       } else if (partName.includes('door')) {
-        return new THREE.MeshBasicMaterial({ color: 0x0000ff }); // Puertas en azul
+        return new THREE.MeshBasicMaterial({ color: 0x0000ff });
       } else {
-        return new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Otras partes en rojo
+        return new THREE.MeshBasicMaterial({ color: 0xff0000 });
       }
     }
 

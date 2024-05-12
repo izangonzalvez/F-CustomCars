@@ -47,7 +47,6 @@ export function Navbar({ brandName, routes, action }) {
             <div className={`pl-9 text-white hidden lg:flex lg:items-center lg:space-x-4 ${menuOpen ? 'hidden' : 'block'}`}>
               <Link to="/project" className="mr-4">Proyectos </Link>
               <Link to="/community" className="mr-4">Comunidad </Link>
-              <Link to="/chat" className="mr-4">Chat </Link>
               <Link to="/contact" className="mr-4">Contacto </Link>
               <Link to="/prueba" className="mr-4">Prueba </Link>
             </div>
