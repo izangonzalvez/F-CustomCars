@@ -3,8 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 export const proveedorSlice = createSlice({
     name: "proveedor",
     initialState: {
-        proveedor: [],
+        proveedor: null,
+        proveedors: [],
         authToken: "",
+        loggedInProveedorId: "",
         isLoading: true,
         roles: [],
         error: "",
@@ -14,8 +16,15 @@ export const proveedorSlice = createSlice({
             state.proveedor = action.payload;
             state.isLoading = false;
         },
+        setProveedors: (state, action) => {
+            state.proveedors = action.payload;
+            state.isLoading = false;
+        },
         setAuthToken: (state, action) => {
             state.authToken = action.payload;
+        },
+        setLoggedInProveedorId: (state, action) => { 
+            state.loggedInProveedorId = action.payload;
         },
         setLoading: (state, action) => {
             state.isLoading = action.payload;
@@ -29,5 +38,5 @@ export const proveedorSlice = createSlice({
     },
 });
 
-export const { setProveedor, setAuthToken, setLoading, setRoles, setError } = proveedorSlice.actions;
+export const { setProveedor, setProveedors, setAuthToken, setLoggedInProveedorId, setLoading, setRoles, setError } = proveedorSlice.actions;
 export const proveedorReducers = proveedorSlice.reducer;
