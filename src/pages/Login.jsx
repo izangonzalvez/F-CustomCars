@@ -6,9 +6,9 @@ import {
 } from "@material-tailwind/react";
 import { Link, redirect, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { doLogin } from "@/slices/auth/thunks";
+import { doLogin, doUser } from "@/slices/auth/thunks";
 import { useForm } from "react-hook-form";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { setAuthToken } from "@/slices/auth/authSlice";
 
 
@@ -32,8 +32,13 @@ export function Login({ setLogin }) {
     dispatch(doLogin(email, password));
 }
 
-if (authToken) {
-  navigate("/") }
+useEffect(() => {
+  if (authToken) {
+    const email = localStorage.getItem('user');
+    dispatch(doUser(email));
+    navigate("/");
+  }
+}, [authToken, dispatch, navigate]);
 
 
 
