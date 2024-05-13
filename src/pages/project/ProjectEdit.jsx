@@ -161,7 +161,7 @@ function ProjectEdit() {
           </div>
           <div>
             <label htmlFor="horn" className="block text-sm font-medium text-gray-700">
-              Bozina
+              Bocina
             </label>
             <input
               type="text"

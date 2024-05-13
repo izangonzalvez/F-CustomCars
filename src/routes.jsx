@@ -3,9 +3,6 @@ import ProjectShow from "./pages/project/ProjectShow";
 import PublishedCar from "./pages/project/PublishedCar";
 import Proveedor, { ProveedorRegister } from "./pages/proveedor/ProveedorRegister";
 import ProveedorLogin from "./pages/proveedor/ProveedorLogin";
-
-
-import RegisterProvider from "./pages/proveedor/RegisterProveedor";
 import ProjectEdit from "./pages/project/ProjectEdit";
 
 export const routes = [

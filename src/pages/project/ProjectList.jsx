@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Footer } from "@/widgets/layout";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { listCars, deleteCar as deleteCarAction, publishCar as publishCarAction } from '@/slices/car/thunks';
 import FloatingChatButton from '../chat/FloatingChatButton';
 
 export function ProjectList() {
+  const [deleteStatus, setDeleteStatus] = useState(null);
   const { authToken } = useSelector(state => state.auth);
   const { cars } = useSelector(state => state.cars);
   const dispatch = useDispatch();
@@ -14,9 +15,14 @@ export function ProjectList() {
     dispatch(listCars(authToken, email));
   }, [authToken]);
 
-  const deleteCar = (carId) => {
-    dispatch(deleteCarAction(carId, authToken));
-    dispatch(listCars(authToken, email));
+  const deleteCar = async (carId) => {
+    setDeleteStatus('eliminando'); // Indicar que se está eliminando el proyecto
+    setTimeout(async () => {
+      await dispatch(deleteCarAction(carId, authToken));
+      await dispatch(listCars(authToken, email));
+      setDeleteStatus('eliminado'); // Indicar que el proyecto ha sido eliminado después de 2 segundos
+      setTimeout(() => setDeleteStatus(null), 2000);
+    }, 2000);
   };
 
   const publishCar = (carId, post) => {
@@ -48,7 +54,7 @@ export function ProjectList() {
                   <hr className="my-4 border-t border-gray-300" />
                   <div className="flex flex-col gap-2">
                     <div><span className="font-semibold">Color:</span> {car.color}</div>
-                    <div><span className="font-semibold">Bozina:</span> {car.horn}</div>
+                    <div><span className="font-semibold">Bocina:</span> {car.horn}</div>
                     <div><span className="font-semibold">Llanta:</span> {car.wheel.name}</div>
                     <div><span className="font-semibold">Motor:</span> {car.engine.name}</div>
                     <div><span className="font-semibold">Suspensión:</span> {car.suspension.name}</div>
@@ -77,6 +83,23 @@ export function ProjectList() {
           )}
         </div>
       </div>
+      {deleteStatus && (
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <div className="bg-white p-8 rounded-lg shadow-lg flex items-center justify-center">
+            {deleteStatus === 'eliminando' ? (
+              <>
+                <div className="animate-spin h-10 w-10 border-t-2 border-b-2 border-green-600 rounded-full mr-4"></div>
+                <div>Eliminando proyecto...</div>
+              </>
+            ) : (
+              <>
+                <div className="text-green-600 mr-4">✓</div>
+                <div>Proyecto eliminado</div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
       <FloatingChatButton />
       <div className="bg-white">
         <Footer />
