@@ -32,6 +32,8 @@ export function Navbar({ brandName, routes, action }) {
     setMenuOpen(!menuOpen);
   };
 
+  // const isProveedor = roles.includes("proveedor");
+
   return (
     <>
       <nav className="px-4 p-4">
@@ -49,6 +51,7 @@ export function Navbar({ brandName, routes, action }) {
               <Link to="/community" className="mr-4">Comunidad </Link>
               <Link to="/contact" className="mr-4">Contacto </Link>
               <Link to="/prueba" className="mr-4">Prueba </Link>
+              <Link to="/proveedor/list" className="mr-4">Proveedores </Link>
             </div>
           </div>
           <div className="lg:hidden">
@@ -80,6 +83,7 @@ export function Navbar({ brandName, routes, action }) {
           <Link to="/chat" className="text-white">Chat </Link>
           <Link to="/contact" className="text-white">Contacto </Link>
           <Link to="/prueba" className="text-white">Prueba </Link>
+          <Link to="/proveedor/list" className="mr-4">Proveedores </Link>
         </div>
       </div>
     </>

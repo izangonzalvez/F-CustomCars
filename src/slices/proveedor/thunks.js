@@ -1,4 +1,4 @@
-import { setProveedor, setAuthToken, setLoading, setRoles, setError } from "./proveedorSlice";
+import { setProveedor ,setProveedors, setAuthToken, setLoggedInProveedorId,  setLoading, setRoles, setError } from "./proveedorSlice";
 
 export const proveedorRegister = (data) => async (dispatch) => {
     console.log(data); // Verifica si los datos están llegando correctamente
@@ -57,6 +57,28 @@ export const proveedorLogin = (email, password) => {
                 
         } catch (error) {
             dispatch(setError(error.message));
+        }
+    }
+}
+
+export const listProveedor = (authToken, email) => {
+    return async (dispatch, getState) => {
+        const data = await fetch("http://127.0.0.1:8000/api/proveedors", {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authToken}`,
+            },
+            method: "GET",
+        })
+        const response = await data.json();
+        console.log(response.data)
+
+        if (response.success == true) {
+            dispatch(setProveedors(response.data));
+            dispatch(setAuthToken(response.authToken));
+        } else {
+            dispatch(setError(response))
         }
     }
 }
