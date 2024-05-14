@@ -9,7 +9,8 @@ export function PublishedCar() {
   const { usuario, authToken } = useSelector(state => state.auth);
   const { cars } = useSelector(state => state.cars);
   const dispatch = useDispatch();
-  
+  const userId = localStorage.getItem('userId');
+  const roleId = localStorage.getItem('roleId');
   useEffect(() => {
     dispatch(listPublished(authToken));
   }, []);
@@ -50,7 +51,9 @@ export function PublishedCar() {
                   <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-b-lg"></div>
                   <div className="flex justify-between mt-4 p-4">
                     <Link to={`/project/${car.id}`} className="text-cyan-600">👁️</Link>
-                    <button onClick={() => deleteCar(car.id)} className="text-red-600">🗑️</button>
+                    {(car.user_id == userId || roleId == "1") && (
+                      <button onClick={() => deleteCar(car.id)} className="text-red-600">🗑️</button>
+                    )}
                   </div>
                 </div>
               )

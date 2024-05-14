@@ -18,13 +18,20 @@ import { ThemeProvider } from "@material-tailwind/react";
 import { Provider } from 'react-redux'
 import { store } from './store.js'
 import "../public/css/tailwind.css";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <ThemeProvider>
-          <App />
+          <PayPalScriptProvider
+            options={{
+              "client-id" : "ASsFU9V3XT4NQgrrPrgjtil-IPh_CDuNM2iz0B2YuZjYjRNoY8AbBxxaT2p2-lw0SwrFf-xCtT6wOa-C"
+            }}
+          >
+            <App />
+          </PayPalScriptProvider>
         </ThemeProvider>
       </BrowserRouter>
     </Provider>,

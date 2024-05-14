@@ -112,7 +112,7 @@ const PDFButton = ({ car }) => {
             <Text style={styles.value}>{car.sideskirt.material} - {car.sideskirt.price}€</Text>
           </View>
           <Text style={[styles.title, { marginTop: 20 }]}>Precio Total: {calculateTotalPrice()}€</Text>
-          <Text style={[styles.title, { marginTop: 10 }]}>Precio Total + IVA: ${calculateTotalPriceWithIVA()}€</Text>
+          <Text style={[styles.title, { marginTop: 10 }]}>Precio Total + IVA: {calculateTotalPriceWithIVA()}€</Text>
         </View>
       </Page>
     </Document>

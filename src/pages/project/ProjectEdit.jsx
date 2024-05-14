@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChromePicker } from 'react-color';
-import { updateCar, listCars } from '@/slices/car/thunks';
+import { updateCar, listCars, showCars } from '@/slices/car/thunks';
 import { listWheels } from '@/slices/wheel/thunks';
 import { listEngines } from '@/slices/engine/thunks';
 import { listSuspensions } from '@/slices/suspension/thunks';
@@ -17,7 +17,6 @@ function ProjectEdit() {
   const { projectId } = useParams();
   const dispatch = useDispatch();
   const { authToken } = useSelector(state => state.auth);
-
   const wheels = useSelector(state => state.wheels.wheels);
   const engines = useSelector(state => state.engines.engines);
   const suspensions = useSelector(state => state.suspensions.suspensions);
@@ -42,6 +41,8 @@ function ProjectEdit() {
   const navigate = useNavigate();
   const [showColorPicker, setShowColorPicker] = useState(false);
 
+  const { car, isLoading } = useSelector(state => state.cars);
+
   useEffect(() => {
     dispatch(listWheels());
     dispatch(listEngines());
@@ -52,6 +53,7 @@ function ProjectEdit() {
     dispatch(listSpoilers());
     dispatch(listSideskirts());
     dispatch(listCars(authToken));
+    dispatch(showCars(projectId, authToken));
   }, [dispatch, authToken]);
 
   const handleChangeColor = (newColor) => {
@@ -77,6 +79,18 @@ function ProjectEdit() {
     };
 
     try {
+      carData.name ? "" : carData.name = car.name
+      carData.color ? "" : carData.color = car.color
+      carData.horn ? "" : carData.horn = car.horn
+      carData.wheel ? "" : carData.wheel = car.wheel.id
+      carData.engine ? "" : carData.engine = car.engine.id
+      carData.suspension ? "" : carData.suspension = car.suspension.id
+      carData.brake ? "" : carData.brake = car.brake.id
+      carData.exhaustpipe ? "" : carData.exhaustpipe = car.exhaustpipe.id
+      carData.light ? "" : carData.light = car.light.id
+      carData.spoiler ? "" : carData.spoiler = car.spoiler.id
+      carData.sideskirt ? "" : carData.sideskirt = car.sideskirt.id
+
       await dispatch(updateCar(projectId, carData, authToken));
       navigate("/project");
     } catch (error) {
@@ -92,6 +106,9 @@ function ProjectEdit() {
       </section>
       <div className="container mx-auto py-12">
         <h1 className="text-3xl font-bold mb-8">Editar Proyecto</h1>
+        {isLoading ? (
+            <p>Cargando...</p>
+          ) : car ? (
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -102,8 +119,7 @@ function ProjectEdit() {
               id="name"
               name="name"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              value={name}
-              defaultValue={name}
+              defaultValue={car.name}
               onChange={(e) => setName(e.target.value)}
               required
             />
@@ -118,8 +134,7 @@ function ProjectEdit() {
                 id="color"
                 name="color"
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-                value={color}
-                defaultValue={color}
+                defaultValue={car.color}
                 onChange={(e) => setColor(e.target.value)}
                 required
               />
@@ -127,7 +142,7 @@ function ProjectEdit() {
                 <button
                   type="button"
                   className="text-gray-700 focus:outline-none focus:text-gray-600"
-                  defaultValue={color}
+                  defaultValue={car.color}
                   onClick={() => setShowColorPicker(!showColorPicker)}
                 >
                   <svg
@@ -161,15 +176,14 @@ function ProjectEdit() {
           </div>
           <div>
             <label htmlFor="horn" className="block text-sm font-medium text-gray-700">
-              Bozina
+              Bocina
             </label>
             <input
               type="text"
               id="horn"
               name="horn"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              value={horn}
-              defaultValue={horn}
+              defaultValue={car.horn}
               onChange={(e) => setHorn(e.target.value)}
               required
             />
@@ -182,8 +196,8 @@ function ProjectEdit() {
               id="wheel"
               name="wheel"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              value={wheel}
-              defaultValue={wheel}
+              // value={car.wheel.id}
+              defaultValue={car.wheel.id}
               onChange={(e) => setWheel(e.target.value)}
               required
             >
@@ -199,13 +213,13 @@ function ProjectEdit() {
               id="engine"
               name="engine"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              value={engine}
-              defaultValue={engine}
+              // value={car.engine.id}
+              defaultValue={car.engine.id}
               onChange={(e) => setEngine(e.target.value)}
               required
             >
               <option value="">Seleccionar motor</option>
-              {engines && engines.map(engine => <option key={engine.id} value={engine.id}>{engine.name}</option>)}
+              {engines && engines.map(engine => <option key={engine.id} value={engine.id} >{engine.name}</option>)}
             </select>
           </div>
           <div>
@@ -216,8 +230,8 @@ function ProjectEdit() {
               id="suspension"
               name="suspension"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              value={suspension}
-              defaultValue={suspension}
+              // value={car.suspension.id}
+              defaultValue={car.suspension.id}
               onChange={(e) => setSuspension(e.target.value)}
               required
             >
@@ -233,8 +247,8 @@ function ProjectEdit() {
               id="brake"
               name="brake"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              value={brake}
-              defaultValue={brake}
+              // value={car.brake.id}
+              defaultValue={car.brake.id}
               onChange={(e) => setBrake(e.target.value)}
               required
             >
@@ -250,8 +264,8 @@ function ProjectEdit() {
               id="exhaustpipe"
               name="exhaustpipe"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              value={exhaustpipe}
-              defaultValue={exhaustpipe}
+              // value={car.exhaustpipe.id}
+              defaultValue={car.exhaustpipe.id}
               onChange={(e) => setExhaustpipe(e.target.value)}
               required
             >
@@ -267,8 +281,8 @@ function ProjectEdit() {
               id="light"
               name="light"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              value={light}
-              defaultValue={light}
+              // value={car.light.id}
+              defaultValue={car.light.id}
               onChange={(e) => setLight(e.target.value)}
               required
             >
@@ -284,8 +298,8 @@ function ProjectEdit() {
               id="spoiler"
               name="spoiler"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              value={spoiler}
-              defaultValue={spoiler}
+              // value={car.spoiler.id}
+              defaultValue={car.spoiler.id}
               onChange={(e) => setSpoiler(e.target.value)}
               required
             >
@@ -301,8 +315,8 @@ function ProjectEdit() {
               id="sideskirt"
               name="sideskirt"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              value={sideskirt}
-              defaultValue={sideskirt}
+              // value={car.sideskirt.id}
+              defaultValue={car.sideskirt.id}
               onChange={(e) => setSideskirt(e.target.value)}
               required
             >
@@ -314,6 +328,9 @@ function ProjectEdit() {
             Guardar Cambios
           </button>
         </form>
+        ) : (
+          <p>No se encontraron detalles del proyecto.</p>
+        )}
       </div>
       <div className="bg-white">
         <Footer />

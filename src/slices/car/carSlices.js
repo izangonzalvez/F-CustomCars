@@ -8,7 +8,8 @@ export const carSlice = createSlice ({
         image: "",
         isLoading: true,
         authToken: "",
-        error: ""
+        error: "",
+        totalPrice: 0
     },
     reducers: {
         setLoading: (state, action) =>{
@@ -16,6 +17,14 @@ export const carSlice = createSlice ({
         },
         setCar: (state, action) => {
             state.car = action.payload
+            state.totalPrice += state.car.wheel.price;
+            state.totalPrice += state.car.engine.price;
+            state.totalPrice += state.car.suspension.price;
+            state.totalPrice += state.car.brake.price;
+            state.totalPrice += state.car.exhaustpipe.price;
+            state.totalPrice += state.car.light.price;
+            state.totalPrice += state.car.spoiler.price;
+            state.totalPrice += state.car.sideskirt.price;
             state.isLoading = false
         },
         setCars: (state, action) => {
