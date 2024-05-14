@@ -1,7 +1,7 @@
 import { setProveedor ,setProveedors, setAuthToken, setLoggedInProveedorId,  setLoading, setRoles, setError } from "./proveedorSlice";
 
 export const proveedorRegister = (data) => async (dispatch) => {
-    console.log(data); // Verifica si los datos están llegando correctamente
+    console.log(data); 
     try {
         const { name, email, password } = data;
         const response = await fetch("http://127.0.0.1:8000/api/proveedorsRegister", {

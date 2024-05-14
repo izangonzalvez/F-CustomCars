@@ -23,7 +23,7 @@ const ProveedorList = () => {
       <div className="container mx-auto py-12">
         <h1 className="text-3xl font-bold mb-8">Lista de Proveedores</h1>
         <div className="mb-8">
-          <Link to="/">
+          <Link to="/proveedor/add-spareparts">
             <button className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg">
               Agregar recambios
             </button>
