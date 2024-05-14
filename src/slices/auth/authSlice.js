@@ -5,20 +5,31 @@ const authSlice = createSlice({
     initialState: {
         authToken: "",
         usuari: "",
-        roles: []
+        roles: [],
+        userId: "",
+        roleId: "",
+        user: ""
     },
-    reducers : {
+    reducers: {
         setAuthToken: (state, action) => {
-            state.authToken = action.payload
+            state.authToken = action.payload;
         },
         setUser: (state, action) => {
-            state.usuari = action.payload
+            state.usuari = action.payload;
         },
         setRoles: (state, action) => {
-            state.roles = action.payload
+            state.roles = action.payload;
+        },
+        resetAuthState: (state, action) => {
+            state.authToken = "";
+            // state.usuari = "";
+            // state.roles = [];
+            state.roleId = "";
+            state.userId = "";
+            state.user = "";
         }
     },
 })
 
-export const { setAuthToken, setUser, setRoles } = authSlice.actions
+export const { setAuthToken, setUser, setRoles, resetAuthState } = authSlice.actions
 export const authReducer = authSlice.reducer

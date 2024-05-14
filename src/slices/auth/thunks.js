@@ -1,4 +1,4 @@
-import { setUser, setRoles, setAuthToken } from "./authSlice";
+import { setUser, setRoles, setAuthToken, resetAuthState } from "./authSlice";
 
 export const doUser = (email) => {
     return async (dispatch, getState) => {
@@ -95,9 +95,7 @@ export const doRegister = (data) => {
 }
 
 export const doLogout = () => {
-    
     return async (dispatch, getState) => {
-        console.log(getState().auth.authToken)
         try {
             const response = await fetch("http://127.0.0.1:8000/api/logout", {
                 headers: {
@@ -106,22 +104,21 @@ export const doLogout = () => {
                 },
                 method: "POST",
             });
-            
+
             const responseData = await response.json();
             console.log(response)
             if (response.ok) {
-                console.log('hols')
                 localStorage.removeItem('authToken');
+                dispatch(setAuthToken(""));
                 localStorage.removeItem('user');
                 localStorage.removeItem('userId');
                 localStorage.removeItem('roleId');
-                dispatch(setAuthToken(""));
+                dispatch(resetAuthState());
             } else {
                 console.error("Error during logout:", responseData.message);
             }
         } catch (error) {
             console.error("Network error during logout:", error);
-
         } 
     }
 }

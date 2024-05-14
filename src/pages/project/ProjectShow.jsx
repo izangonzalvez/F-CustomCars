@@ -4,11 +4,12 @@ import { useParams } from 'react-router-dom';
 import { showCars } from '@/slices/car/thunks';
 import { Footer } from "@/widgets/layout";
 import PDFButton from './PDFButton';
+import PaypalButton from './PayPalButton';
 
 export function ProjectShow() {
   const { projectId } = useParams();
   const { authToken } = useSelector(state => state.auth);
-  const { car, isLoading } = useSelector(state => state.cars);
+  const { car, isLoading, totalPrice } = useSelector(state => state.cars);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,6 +35,8 @@ export function ProjectShow() {
           {isLoading ? (
             <p>Cargando...</p>
           ) : car ? (
+            <>
+            <PaypalButton totalValue={totalPrice} invoice={'Presupuesto'} />
             <table className="min-w-full divide-y divide-gray-200">
               <tbody className="bg-white divide-y divide-gray-200">
               <TableRow title="Nombre" value={car.name} />
@@ -43,43 +46,52 @@ export function ProjectShow() {
                 <TableRow title="Nombre" value={car.wheel.name} />
                 <TableRow title="Tipo" value={car.wheel.type} />
                 <TableRow title="Pulgadas" value={car.wheel.inch} />
+                <TableRow title="Precio" value={car.wheel.price + "€"} />
               </TableRowGroup>
               <TableRowGroup title="Motor">
                 <TableRow title="Nombre" value={car.engine.name} />
                 <TableRow title="Potencia" value={car.engine.power} />
                 <TableRow title="Revoluciones" value={car.engine.revolutions} />
                 <TableRow title="Combustible" value={car.engine.fuel} />
+                <TableRow title="Precio" value={car.engine.price + "€"} />
               </TableRowGroup>
               <TableRowGroup title="Suspensión">
                 <TableRow title="Nombre" value={car.suspension.name} />
                 <TableRow title="Tipo" value={car.suspension.type} />
+                <TableRow title="Precio" value={car.suspension.price + "€"} />
               </TableRowGroup>
               <TableRowGroup title="Frenos">
                 <TableRow title="Nombre" value={car.brake.name} />
                 <TableRow title="Estilo" value={car.brake.style} />
                 <TableRow title="Modelo" value={car.brake.model} />
+                <TableRow title="Precio" value={car.brake.price + "€"} />
               </TableRowGroup>
               <TableRowGroup title="Escape">
                 <TableRow title="Tipo" value={car.exhaustpipe.type} />
                 <TableRow title="Tamaño" value={car.exhaustpipe.size} />
+                <TableRow title="Precio" value={car.exhaustpipe.price + "€"} />
               </TableRowGroup>
               <TableRowGroup title="Faros">
                 <TableRow title="Nombre" value={car.light.name} />
                 <TableRow title="Tipo" value={car.light.type} />
                 <TableRow title="Color" value={car.light.color} />
+                <TableRow title="Precio" value={car.light.price + "€"} />
               </TableRowGroup>
               <TableRowGroup title="Alerón">
                 <TableRow title="Tipo" value={car.spoiler.type} />
                 <TableRow title="Tamaño" value={car.spoiler.size} />
                 <TableRow title="Material" value={car.spoiler.material} />
+                <TableRow title="Precio" value={car.spoiler.price + "€"} />
               </TableRowGroup>
               <TableRowGroup title="Taloneras">
                 <TableRow title="Material" value={car.sideskirt.material} />
                 <TableRow title="Tamaño" value={car.sideskirt.size} />
                 <TableRow title="Tamaño" value={car.sideskirt.size} />
+                <TableRow title="Precio" value={car.sideskirt.price + "€"} />
               </TableRowGroup> 
               </tbody>
             </table>
+            </>
           ) : (
             <p>No se encontraron detalles del proyecto.</p>
           )}
@@ -90,7 +102,7 @@ export function ProjectShow() {
           )}
         </div>
       </div>
-      <footer className="bg-white fixed bottom-0 left-0 right-0">
+      <footer className="bg-white">
         <Footer />
       </footer>
     </>
