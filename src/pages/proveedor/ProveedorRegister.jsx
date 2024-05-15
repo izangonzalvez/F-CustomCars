@@ -5,11 +5,11 @@ import {
     Typography,
   } from "@material-tailwind/react";
   import { Link, Navigate } from "react-router-dom";
-  import { useSelector, useDispatch } from 'react-redux';
+  import { useSelector, useDispatch} from 'react-redux';
   import { useNavigate } from "react-router-dom";
   import { useForm } from "react-hook-form";
   import { useState } from "react";
-  import { proveedorRegister } from "@/slices/proveedor/thunks";
+  import { doRegisterProv} from "@/slices/proveedor/thunks";
 
 
   export const ProveedorRegister = ({ setLogin }) => {
@@ -18,16 +18,13 @@ import {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
-
+    
     const onSubmit = (data) => {
-        dispatch(proveedorRegister(data));
+      dispatch(doRegisterProv(data));
+      navigate("/");
     };
 
-    if (authToken) {
-        navigate("/");
-    }
-    
-
+  
     return (
       <section className="m-8 flex">
               <div className="w-2/5 h-full hidden lg:block">
