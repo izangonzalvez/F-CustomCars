@@ -1,4 +1,4 @@
-import { setAuthToken, setUser, setRoles, resetAuthState, setError } from "./proveedorSlice";
+import { setAuthToken, setUser, setRoles, resetAuthState } from "../auth/authSlice";
 
 export const doUserProv = (email) => {
     return async (dispatch, getState) => {
@@ -39,14 +39,14 @@ export const doRegisterProv = (data) => {
                 method: "POST",
                 body: JSON.stringify({ name, email, password, role_id })
             })
-            const data =  await response.json();
+            const responseData =  await response.json();
             console.log(response)
 
             if (response.ok) {
-                localStorage.setItem('authToken', data.authToken);
+                localStorage.setItem('authToken', responseData.authToken);
                 localStorage.setItem('user', email);
                 dispatch(setUser(email))  
-                dispatch(setAuthToken(data.authToken));
+                dispatch(setAuthToken(responseData.authToken));
                 dispatch(setRoles(response.roles)) 
             } else {
                 console.error("Error registering:", response.message);

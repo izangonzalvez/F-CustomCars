@@ -8,26 +8,33 @@ import {
   import { useSelector, useDispatch} from 'react-redux';
   import { useNavigate } from "react-router-dom";
   import { useForm } from "react-hook-form";
-  import { useState } from "react";
+  import { useEffect, useState } from "react";
   import { doRegisterProv} from "@/slices/proveedor/thunks";
+import { doUser } from "@/slices/auth/thunks";
 
 
-  export const ProveedorRegister = ({ setLogin }) => {
+  export const ProveedorRegister = () => {
 
-    const { authToken } = useSelector(state => state.auth);
+    const { usuari, authToken } = useSelector(state => state.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     
     const onSubmit = (data) => {
       dispatch(doRegisterProv(data));
-      navigate("/");
     };
 
+    useEffect(() => {
+      if (authToken) {
+        const email = localStorage.getItem('user');
+        dispatch(doUser(email));
+        navigate("/");
+      }
+    }, [authToken, dispatch, navigate]);
   
     return (
       <section className="m-8 flex">
-              <div className="w-2/5 h-full hidden lg:block">
+        <div className="w-2/5 h-full hidden lg:block">
           <img
             src="/img/rx8-izquierda.jpg"
             className="h-full w-full object-cover rounded-3xl"

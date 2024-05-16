@@ -19,12 +19,10 @@ const ProveedorList = () => {
 
   return (
     <>
-      {roleID === "4" && (
-        <section className="relative block h-[18vh]">
-          <div className="bg-profile-background absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center scale-105" />
-          <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
-        </section>
-      )}
+      <section className="relative block h-[18vh]">
+        <div className="bg-profile-background absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center scale-105" />
+        <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
+      </section>
       <div className="container mx-auto py-12">
         <h1 className="text-3xl font-bold mb-8">Lista de Proveedores</h1>
         <div className="mb-8">
