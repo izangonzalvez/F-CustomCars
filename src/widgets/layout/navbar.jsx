@@ -32,7 +32,7 @@ export function Navbar({ brandName, routes, action }) {
     setMenuOpen(!menuOpen);
   };
 
-  // const isProveedor = roles.includes("proveedor");
+  const roleId = localStorage.getItem('roleId');
 
   return (
     <>
@@ -52,6 +52,7 @@ export function Navbar({ brandName, routes, action }) {
               <Link to="/contact" className="mr-4">Contacto </Link>
               <Link to="/prueba" className="mr-4">Prueba </Link>
               {roleId === 4 && <Link to="/proveedor/list" className="mr-4">Proveedores </Link>}
+              {roleId == "1" && <Link to="/contactList" className="mr-4">Lista de contacts </Link>}
             </div>
           </div>
           <div className="lg:hidden">
@@ -83,7 +84,8 @@ export function Navbar({ brandName, routes, action }) {
           <Link to="/chat" className="text-white">Chat </Link>
           <Link to="/contact" className="text-white">Contacto </Link>
           <Link to="/prueba" className="text-white">Prueba </Link>
-          {roleId === 4 && <Link to="/proveedor/list" className="mr-4">Proveedores </Link>}
+          {roleId === 4 && <Link to="/proveedor/list" className="text-white">Proveedores </Link>}
+          {roleId == "1" && <Link to="/contactList" className="text-white">Lista de contacts </Link>}
         </div>
       </div>
     </>
