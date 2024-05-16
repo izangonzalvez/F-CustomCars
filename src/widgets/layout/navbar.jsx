@@ -51,7 +51,7 @@ export function Navbar({ brandName, routes, action }) {
               <Link to="/community" className="mr-4">Comunidad </Link>
               <Link to="/contact" className="mr-4">Contacto </Link>
               <Link to="/prueba" className="mr-4">Prueba </Link>
-              {roleId == "4" || roleId == "1" && <Link to="/proveedor/list" className="mr-4">Proveedores </Link>}
+              {(roleId === "1" || roleId === "4") && <Link to="/proveedor/list" className="mr-4">Proveedores </Link>}
               {roleId == "1" && <Link to="/contactList" className="mr-4">Lista de contacts </Link>}
             </div>
           </div>
