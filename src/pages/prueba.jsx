@@ -8,7 +8,7 @@ export function Car() {
   const [modelLoaded, setModelLoaded] = useState(false);
 
   useEffect(() => {
-    let scene, camera, renderer, controls;
+    let scene, camera, renderer, controls, carModel;
 
     function initThree() {
       scene = new THREE.Scene();
@@ -21,7 +21,6 @@ export function Car() {
       camera.lookAt(new THREE.Vector3(5, 0, 0));
 
       controls = new OrbitControls(camera, renderer.domElement);
-      
       controls.rotateSpeed = 0.5;
       controls.zoomSpeed = 1.2;
       controls.panSpeed = 0.8;
@@ -35,11 +34,12 @@ export function Car() {
           function (object) {
             object.traverse(function (child) {
               if (child instanceof THREE.Mesh) {
-                const material = getMaterialByPartName(child.name);
+                const material = new THREE.MeshBasicMaterial({ color: 0xffffff }); // Color blanco
                 child.material = material;
               }
             });
             scene.add(object);
+            carModel = object; // Guardamos una referencia al modelo del coche
             setModelLoaded(true);
           },
           function (xhr) {
@@ -52,19 +52,13 @@ export function Car() {
       }
     }
 
-    function getMaterialByPartName(partName) {
-      if (partName.includes('wheel')) {
-        return new THREE.MeshBasicMaterial({ color: 0x000000 });
-      } else if (partName.includes('door')) {
-        return new THREE.MeshBasicMaterial({ color: 0x0000ff });
-      } else {
-        return new THREE.MeshBasicMaterial({ color: 0xff0000 });
-      }
-    }
-
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
+      if (carModel) {
+        // Rotamos el modelo del coche sobre su eje Y
+        carModel.rotation.y += 0.01; // Ajusta la velocidad de rotación según sea necesario
+      }
       renderer.render(scene, camera);
     }
 

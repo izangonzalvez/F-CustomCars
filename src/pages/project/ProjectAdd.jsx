@@ -87,21 +87,7 @@ export function ProjectAdd() {
       email
     };
 
-    try {
-      const response = await dispatch(createCar(carData));
-      navigate("/project")
-
-      if (response) {
-        console.log('Car created successfully!');
-        navigate("/project")
-      } else {
-        console.error('Failed to create car:', response);
-      }
-      
-    } catch (error) {
-      console.error('Failed to create car:', error.message);
-    }
-
+    dispatch(createCar(carData))
   };
   
   return (

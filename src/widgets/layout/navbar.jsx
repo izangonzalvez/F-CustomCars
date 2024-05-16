@@ -9,7 +9,7 @@ import { setAuthToken, setRoles, setUser } from "@/slices/auth/authSlice";
 export function Navbar({ brandName, routes, action }) {
   const navigate = useNavigate();
 
-  const { usuari, authToken, roleId } = useSelector((state) => state.auth);
+  const { usuari, authToken } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
