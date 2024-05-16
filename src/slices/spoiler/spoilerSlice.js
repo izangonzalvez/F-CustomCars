@@ -3,11 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 export const spoilerSlice = createSlice ({
     name: "spoilers",
     initialState: {
+        spoiler: null,
         spoilers: [],
         isLoading: true,
         error: "",
     },
     reducers: {
+        setSpoiler: (state, action) => {
+            state.spoiler = action.payload;
+            state.isLoading = false;
+        },
         setSpoilers: (state, action) => {
             state.spoilers = action.payload;
             state.isLoading = false;
@@ -21,5 +26,5 @@ export const spoilerSlice = createSlice ({
     }
 });
 
-export const { setSpoilers, setLoading, setError } = spoilerSlice.actions;
+export const { setSpoiler, setSpoilers, setLoading, setError } = spoilerSlice.actions;
 export const spoilerReducers = spoilerSlice.reducer;

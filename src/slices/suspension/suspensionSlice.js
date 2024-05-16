@@ -3,11 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 export const suspensionSlice = createSlice ({
     name: "suspensions",
     initialState: {
+        suspension: null,
         suspensions: [],
         isLoading: true,
         error: "",
     },
     reducers: {
+        setSuspension: (state, action) => {
+            state.suspension = action.payload;
+            state.isLoading = false;
+        },
         setSuspensions: (state, action) => {
             state.suspensions = action.payload;
             state.isLoading = false;
@@ -21,5 +26,5 @@ export const suspensionSlice = createSlice ({
     }
 });
 
-export const { setSuspensions, setLoading, setError } = suspensionSlice.actions;
+export const { setSuspension, setSuspensions, setLoading, setError } = suspensionSlice.actions;
 export const suspensionReducers = suspensionSlice.reducer;
