@@ -36,10 +36,6 @@ export function ProjectList() {
 
   return (
     <>
-      <section className="relative block h-[18vh]">
-        <div className="bg-profile-background absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center scale-105" />
-        <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
-      </section>
       <div className="container mx-auto py-12">
         {isLoggedIn ? (
           <>

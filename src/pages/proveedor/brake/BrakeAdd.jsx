@@ -23,16 +23,12 @@ export function BrakeAdd() {
             proveedor_id: userId
         };
 
-        // Despachar la acción para agregar frenos
         dispatch(addBrakes(brakeData));
+        
     }
 
     return (
         <>
-            <section className="relative block h-[18vh]">
-                <div className="bg-profile-background absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center scale-105" />
-                <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
-            </section>
             <div className="container mx-auto py-12">
                 <h1 className="text-3xl font-bold mb-8">Frenos</h1>
 
@@ -57,7 +53,9 @@ export function BrakeAdd() {
                         <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} className="input" />
                     </div>
 
-                    <button type="submit" className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg">Añadir Frenos</button>
+                    <button type="submit" className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg">Añadir</button>
+                    {/* <button className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg">👁️</button>
+                    <button onClick={() => setShowList(true)} className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg">Lista</button> */}
                 </form>
             </div>
         </>

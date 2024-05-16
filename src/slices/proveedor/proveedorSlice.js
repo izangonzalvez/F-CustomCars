@@ -1,35 +1,48 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
-export const proveedorSlice = createSlice({
-    name: "proveedor",
+const proveedorSlice = createSlice({
+    name: 'proveedors',
     initialState: {
         authToken: "",
-        proveedor: "",
-        // proveedors: [],
+        usuari: [],
         roles: [],
-        roleID: "",
+        userId: "",
+        roleId: "",
+        user: "",
         error: "",
+        isLoading: true,
     },
     reducers: {
         setAuthToken: (state, action) => {
             state.authToken = action.payload;
         },
-        setProveedor: (state, action) => {
-            state.proveedor = action.payload;
+        setUser: (state, action) => {
+            state.usuari = action.payload;
+            state.isLoading = false;
         },
-
         setRoles: (state, action) => {
             state.roles = action.payload;
+        },
+        resetAuthState: (state, action) => {
+            state.authToken = "";
+            // state.usuari = "";
+            // state.roles = [];
+            state.roleId = "";
+            state.userId = "";
+            state.user = "";
         },
         setError: (state, action) => {
             state.error = action.payload;
         },
-        resetAuthState: (state, payload) => {
-            state.authToken = "";
-            state.roleID = "";
-        }
+        setLoading: (state, action) => {
+            state.isLoading = action.payload;
+        },
     },
-});
+})
 
-export const { setProveedor, setAuthToken,  setRoles, setError, resetAuthState } = proveedorSlice.actions;
-export const proveedorReducers = proveedorSlice.reducer;
+export const { setAuthToken, setUser, setRoles, resetAuthState, setError } = proveedorSlice.actions
+export const proveedorsReducers = proveedorSlice.reducer
+
+
+
+

@@ -9,7 +9,7 @@ import { exhaustpipeReducers } from './slices/exhaustpipe/exhaustpipeSlice';
 import { lightReducers } from './slices/light/lightSlice';
 import { spoilerReducers } from './slices/spoiler/spoilerSlice';
 import { sideskirtReducers } from './slices/sideskirt/sideskirtSlice';
-import { proveedorReducers } from './slices/proveedor/proveedorSlice';
+import { proveedorsReducers } from './slices/proveedor/proveedorSlice';
 
 export const store = configureStore({
     reducer: {
@@ -23,6 +23,6 @@ export const store = configureStore({
       lights: lightReducers,
       spoilers: spoilerReducers,
       sideskirts: sideskirtReducers,
-      proveedors: proveedorReducers,
+      proveedors: proveedorsReducers,
     },
 });
