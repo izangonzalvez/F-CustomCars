@@ -9,7 +9,7 @@ import { setAuthToken, setRoles, setUser } from "@/slices/auth/authSlice";
 export function Navbar({ brandName, routes, action }) {
   const navigate = useNavigate();
 
-  const { usuari, authToken } = useSelector((state) => state.auth);
+  const { usuari, authToken, roleId } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export function Navbar({ brandName, routes, action }) {
               <Link to="/community" className="mr-4">Comunidad </Link>
               <Link to="/contact" className="mr-4">Contacto </Link>
               <Link to="/prueba" className="mr-4">Prueba </Link>
-              <Link to="/proveedor/list" className="mr-4">Proveedores </Link>
+              {roleId === 4 && <Link to="/proveedor/list" className="mr-4">Proveedores </Link>}
               {roleId == "1" && <Link to="/contactList" className="mr-4">Lista de contacts </Link>}
             </div>
           </div>
@@ -84,7 +84,7 @@ export function Navbar({ brandName, routes, action }) {
           <Link to="/chat" className="text-white">Chat </Link>
           <Link to="/contact" className="text-white">Contacto </Link>
           <Link to="/prueba" className="text-white">Prueba </Link>
-          <Link to="/proveedor/list" className="text-white">Proveedores </Link>
+          {roleId === 4 && <Link to="/proveedor/list" className="text-white">Proveedores </Link>}
           {roleId == "1" && <Link to="/contactList" className="text-white">Lista de contacts </Link>}
         </div>
       </div>

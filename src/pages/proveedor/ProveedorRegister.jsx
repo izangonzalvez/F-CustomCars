@@ -5,52 +5,26 @@ import {
     Typography,
   } from "@material-tailwind/react";
   import { Link, Navigate } from "react-router-dom";
-  import { useSelector, useDispatch } from 'react-redux';
+  import { useSelector, useDispatch} from 'react-redux';
   import { useNavigate } from "react-router-dom";
   import { useForm } from "react-hook-form";
   import { useState } from "react";
-  import { proveedorRegister } from "@/slices/proveedor/thunks";
+  import { doRegisterProv} from "@/slices/proveedor/thunks";
 
 
   export const ProveedorRegister = ({ setLogin }) => {
-    // const { usuari,authToken } = useSelector (state => state.auth)
-    // const navigate = useNavigate();
-    // const dispatch = useDispatch() 
-    // const {
-    //   register,
-    //   handleSubmit,
-    //   getValues,
-    //   setError,
-    //   formState: { errors },
-    // } = useForm();
-
-    // let usuaris = [];
-
-    // usuaris = JSON.parse(localStorage.getItem("usuaris")) || [];
-    // console.log(usuaris[1])
-
-    // const onSubmit = (data) => {
-    //   const { name, email, password } = data;
-    //   dispatch(proveedorRegister({ name, email, password }));
-    // };
-
-    // if (authToken)  {
-    //   navigate("/") }
 
     const { authToken } = useSelector(state => state.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
-
+    
     const onSubmit = (data) => {
-        dispatch(proveedorRegister(data));
+      dispatch(doRegisterProv(data));
+      navigate("/");
     };
 
-    if (authToken) {
-        navigate("/");
-    }
-    
-
+  
     return (
       <section className="m-8 flex">
               <div className="w-2/5 h-full hidden lg:block">
@@ -127,7 +101,7 @@ import {
             </Button>
             <Typography variant="paragraph" className="text-center text-blue-gray-500 font-medium mt-4">
               No estas registrado?
-              <Link to="/proveedor/login" className="text-gray-900 ml-1">Inicia sesion aqui</Link>
+              <Link to="/login" className="text-gray-900 ml-1">Inicia sesion aqui</Link>
             </Typography>
           </form>
 

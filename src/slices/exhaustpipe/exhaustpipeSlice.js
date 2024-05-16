@@ -3,11 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 export const exhaustpipeSlice = createSlice ({
     name: "exhaustpipes",
     initialState: {
+        exhaustpipe: null,
         exhaustpipes: [],
         isLoading: true,
         error: "",
     },
     reducers: {
+        setExhaustpipe: (state, action) => {
+            state.exhaustpipe = action.payload;
+            state.isLoading = false;
+        },
         setExhaustpipes: (state, action) => {
             state.exhaustpipes = action.payload;
             state.isLoading = false;
@@ -21,5 +26,5 @@ export const exhaustpipeSlice = createSlice ({
     }
 });
 
-export const { setExhaustpipes, setLoading, setError } = exhaustpipeSlice.actions;
+export const { setExhaustpipe, setExhaustpipes, setLoading, setError } = exhaustpipeSlice.actions;
 export const exhaustpipeReducers = exhaustpipeSlice.reducer;

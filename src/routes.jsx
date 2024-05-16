@@ -2,10 +2,11 @@ import { Home, Profile, ProjectList, ProjectAdd,Login, Register, Contact, Car } 
 import ProjectShow from "./pages/project/ProjectShow";
 import PublishedCar from "./pages/project/PublishedCar";
 import Proveedor, { ProveedorRegister } from "./pages/proveedor/ProveedorRegister";
-import ProveedorLogin from "./pages/proveedor/ProveedorLogin";
+
 import ProjectEdit from "./pages/project/ProjectEdit";
 import ListProveedor from "./pages/proveedor/ListProveedor";
 import ContactList from "./pages/contact/ContactList";
+import AddSpareparts from "./pages/proveedor/AddSpareparts";
 
 export const routes = [
   {
@@ -69,15 +70,17 @@ export const routes = [
     element: <ProveedorRegister />,
   },
   {
-    name: "Proveedor Login",
-    path: "/proveedor/login",
-    element: <ProveedorLogin />,
-  },
-  {
     name: "Proveedor List",
     path: "/proveedor/list",
     element: <ListProveedor />,
   },
+  {
+    name: "Proveedor Login",
+    path: "/proveedor/add-spareparts",
+    element: <AddSpareparts />,
+  },
+
+
   {
     name: "Proyectos Edit",
     path: "/project/:projectId/edit",
