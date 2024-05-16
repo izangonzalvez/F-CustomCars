@@ -5,6 +5,7 @@ import Proveedor, { ProveedorRegister } from "./pages/proveedor/ProveedorRegiste
 import ProveedorLogin from "./pages/proveedor/ProveedorLogin";
 import ProjectEdit from "./pages/project/ProjectEdit";
 import ListProveedor from "./pages/proveedor/ListProveedor";
+import ContactList from "./pages/contact/ContactList";
 
 export const routes = [
   {
@@ -36,6 +37,11 @@ export const routes = [
     name: "Contacto",
     path: "/contact",
     element: <Contact />,
+  },
+  {
+    name: "Lista Contactos",
+    path: "/contactList",
+    element: <ContactList />,
   },
   {
     name: "profile",

@@ -49,7 +49,6 @@ export const doLogin = (email, password) => {
                 localStorage.setItem('authToken', response.authToken);
                 localStorage.setItem('user', email);
                 console.log(response)
-                // localStorage.setItem('user', user_id);
                 dispatch(setAuthToken(response.authToken))
                 dispatch(setUser(email))  
                 dispatch(setRoles(response.roles))
