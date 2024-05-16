@@ -12,22 +12,12 @@
     import { useEffect, useState } from "react";
 
 
-    export const Register = ({ setLogin }) => {
+    export const Register = ({ }) => {
       const { usuari,authToken } = useSelector (state => state.auth)
       const navigate = useNavigate();
       const dispatch = useDispatch() 
-      const {
-        register,
-        handleSubmit,
-        getValues,
-        setError,
-        formState: { errors },
-      } = useForm();
+      const { register, handleSubmit } = useForm();
 
-      let usuaris = [];
-
-      usuaris = JSON.parse(localStorage.getItem("usuaris")) || [];
-      console.log(usuaris)
 
       const onSubmit = (data) => {
         dispatch(doRegister(data));
