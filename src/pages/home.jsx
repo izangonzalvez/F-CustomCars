@@ -85,41 +85,7 @@ export function Home() {
           </div>
         </div>
       </section>
-
-      {/* Bloque contact from y mas */}
-        <div className="container mx-auto">
-          <PageTitle section="Contacto" heading="Contactanos, no lo dudes">
-            Completa el formulario y los técnicos te responderan lo antes possible.
-          </PageTitle>
-          <form className="mx-auto w-full mt-12 lg:w-5/12">
-            <div className="mb-8 flex gap-8">
-              <Input variant="outlined" size="lg" label="Nombre completo" />
-              <Input variant="outlined" size="lg" label="Dirección de correo" />
-            </div>
-            <Textarea variant="outlined" size="lg" label="Mensaje" rows={8} />
-            <Checkbox
-              label={
-                <Typography
-                  variant="small"
-                  color="gray"
-                  className="flex items-center font-normal"
-                >
-                  Acepto
-                  <a
-                    href="../../public/upload/Condiciones.pdf"
-                    className="font-medium transition-colors hover:text-gray-900"
-                  >
-                    &nbsp;Términos y condiciones
-                  </a>
-                </Typography>
-              }
-              containerProps={{ className: "-ml-2.5" }}
-            />
-            <Button variant="gradient" size="lg" className="mt-8" fullWidth>
-              Enviar
-            </Button>
-          </form>
-        </div>
+      
       <FloatingChatButton />
       <div className="bg-white">
         <Footer />

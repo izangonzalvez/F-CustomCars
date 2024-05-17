@@ -11,12 +11,12 @@ import { listLights } from '@/slices/light/thunks';
 import { listSpoilers } from '@/slices/spoiler/thunks';
 import { listSideskirts } from '@/slices/sideskirt/thunks';
 import { Footer } from '@/widgets/layout';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export function ProjectAdd() {
   const dispatch = useDispatch();
-  const post = 0
-  const { usuari, authToken } = useSelector(state => state.auth);
+  const post = 0;
+  const { authToken } = useSelector(state => state.auth);
 
   const wheels = useSelector(state => state.wheels.wheels);
   const engines = useSelector(state => state.engines.engines);
@@ -41,6 +41,7 @@ export function ProjectAdd() {
   const [sideskirt, setSideskirt] = useState('');
   const navigate = useNavigate();
   const [showColorPicker, setShowColorPicker] = useState(false);
+
   const handleChangeColor = (newColor) => {
     setColor(newColor.hex);
   };
@@ -55,18 +56,7 @@ export function ProjectAdd() {
     dispatch(listSpoilers());
     dispatch(listSideskirts());
     dispatch(listCars(authToken, email));
-  }, [dispatch]);
-
-  useEffect(() => {
-    console.log("Wheels:", wheels);
-    console.log("Engines:", engines);
-    console.log("Suspensions:", suspensions);
-    console.log("Brakes:", brakes);
-    console.log("Exhaustpipes:", exhaustpipes);
-    console.log("Lights:", lights);
-    console.log("Spoilers:", spoilers);
-    console.log("Sideskirts:", sideskirts);
-  }, [wheels, engines, suspensions, brakes, exhaustpipes, lights, spoilers, sideskirts]);
+  }, [dispatch, authToken, email]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,9 +77,19 @@ export function ProjectAdd() {
       email
     };
 
-    dispatch(createCar(carData))
+    try {
+      const response = await dispatch(createCar(carData));
+      if (response) {
+        console.log('Car created successfully!');
+        navigate("/project");
+      } else {
+        console.error('Failed to create car:', response);
+      }
+    } catch (error) {
+      console.error('Failed to create car:', error.message);
+    }
   };
-  
+
   return (
     <>
       <section className="relative block h-[18vh]">
@@ -97,95 +97,139 @@ export function ProjectAdd() {
         <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
       </section>
       <div className="container mx-auto py-12">
-        <h1 className="text-3xl font-bold mb-8">Crear Proyecto</h1>
-        <form className="space-y-4">
+        <h1 className="text-4xl font-bold mb-12 text-center text-gray-800">Crear Proyecto</h1>
+        <form className="bg-white rounded-lg shadow-lg p-8 space-y-6" onSubmit={handleSubmit}>
           <div className="flex flex-col">
-            <label className="text-sm text-gray-900 font-light">Nombre:</label>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="input" />
+            <label className="text-sm text-gray-900 font-medium">Nombre:</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            />
           </div>
           <div className="flex flex-col">
-            <label className="text-sm text-gray-900 font-light">Color:</label>
+            <label className="text-sm text-gray-900 font-medium">Color:</label>
             <div className="relative">
               <input
                 type="text"
                 value={color}
                 onClick={() => setShowColorPicker(!showColorPicker)}
-                className="input"
+                className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
               />
               {showColorPicker && (
-                <div className="absolute top-[calc(100%+5px)] left-0">
+                <div className="absolute top-[calc(100%+5px)] left-0 z-10">
                   <ChromePicker color={color} onChange={handleChangeColor} />
                 </div>
               )}
             </div>
           </div>
           <div className="flex flex-col">
-            <label className="text-sm text-gray-900 font-light">Bozina:</label>
-            <input type="text" value={horn} onChange={(e) => setHorn(e.target.value)} className="input" />
+            <label className="text-sm text-gray-900 font-medium">Bozina:</label>
+            <input
+              type="text"
+              value={horn}
+              onChange={(e) => setHorn(e.target.value)}
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            />
           </div>
           <div className="flex flex-col">
-            <label className="text-sm text-gray-900 font-light">Llanta:</label>
-            <select value={wheel} onChange={(e) => setWheel(e.target.value)} className="input">
+            <label className="text-sm text-gray-900 font-medium">Llanta:</label>
+            <select
+              value={wheel}
+              onChange={(e) => setWheel(e.target.value)}
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
               <option value="">Seleccionar llanta</option>
               {wheels && wheels.map(wheel => <option key={wheel.id} value={wheel.id}>{wheel.name}</option>)}
             </select>
           </div>
           <div className="flex flex-col">
-            <label className="text-sm text-gray-900 font-light">Motor:</label>
-            <select value={engine} onChange={(e) => setEngine(e.target.value)} className="input">
+            <label className="text-sm text-gray-900 font-medium">Motor:</label>
+            <select
+              value={engine}
+              onChange={(e) => setEngine(e.target.value)}
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
               <option value="">Seleccionar motor</option>
               {engines && engines.map(engine => <option key={engine.id} value={engine.id}>{engine.name}</option>)}
             </select>
           </div>
           <div className="flex flex-col">
-            <label className="text-sm text-gray-900 font-light">Suspensión:</label>
-            <select value={suspension} onChange={(e) => setSuspension(e.target.value)} className="input">
+            <label className="text-sm text-gray-900 font-medium">Suspensión:</label>
+            <select
+              value={suspension}
+              onChange={(e) => setSuspension(e.target.value)}
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
               <option value="">Seleccionar suspensión</option>
               {suspensions && suspensions.map(suspension => <option key={suspension.id} value={suspension.id}>{suspension.name}</option>)}
             </select>
           </div>
           <div className="flex flex-col">
-            <label className="text-sm text-gray-900 font-light">Frenos:</label>
-            <select value={brake} onChange={(e) => setBrake(e.target.value)} className="input">
+            <label className="text-sm text-gray-900 font-medium">Frenos:</label>
+            <select
+              value={brake}
+              onChange={(e) => setBrake(e.target.value)}
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
               <option value="">Seleccionar frenos</option>
               {brakes && brakes.map(brake => <option key={brake.id} value={brake.id}>{brake.name}</option>)}
             </select>
           </div>
           <div className="flex flex-col">
-            <label className="text-sm text-gray-900 font-light">Escape:</label>
-            <select value={exhaustpipe} onChange={(e) => setExhaustpipe(e.target.value)} className="input">
+            <label className="text-sm text-gray-900 font-medium">Escape:</label>
+            <select
+              value={exhaustpipe}
+              onChange={(e) => setExhaustpipe(e.target.value)}
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
               <option value="">Seleccionar escape</option>
               {exhaustpipes && exhaustpipes.map(exhaustpipe => <option key={exhaustpipe.id} value={exhaustpipe.id}>{exhaustpipe.type}</option>)}
             </select>
           </div>
           <div className="flex flex-col">
-            <label className="text-sm text-gray-900 font-light">Faros:</label>
-            <select value={light} onChange={(e) => setLight(e.target.value)} className="input">
+            <label className="text-sm text-gray-900 font-medium">Faros:</label>
+            <select
+              value={light}
+              onChange={(e) => setLight(e.target.value)}
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
               <option value="">Seleccionar faros</option>
               {lights && lights.map(light => <option key={light.id} value={light.id}>{light.name}</option>)}
             </select>
           </div>
           <div className="flex flex-col">
-            <label className="text-sm text-gray-900 font-light">Alerón:</label>
-            <select value={spoiler} onChange={(e) => setSpoiler(e.target.value)} className="input">
+            <label className="text-sm text-gray-900 font-medium">Alerón:</label>
+            <select
+              value={spoiler}
+              onChange={(e) => setSpoiler(e.target.value)}
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
               <option value="">Seleccionar alerón</option>
               {spoilers && spoilers.map(spoiler => <option key={spoiler.id} value={spoiler.id}>{spoiler.type}</option>)}
             </select>
           </div>
           <div className="flex flex-col">
-            <label className="text-sm text-gray-900 font-light">Taloneras:</label>
-            <select value={sideskirt} onChange={(e) => setSideskirt(e.target.value)} className="input">
+            <label className="text-sm text-gray-900 font-medium">Taloneras:</label>
+            <select
+              value={sideskirt}
+              onChange={(e) => setSideskirt(e.target.value)}
+              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
               <option value="">Seleccionar taloneras</option>
               {sideskirts && sideskirts.map(sideskirt => <option key={sideskirt.id} value={sideskirt.id}>{sideskirt.material}</option>)}
             </select>
           </div>
-          <button type="submit" className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg" onClick={handleSubmit}>Crear Proyecto</button>
+          <button
+            type="submit"
+            className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105"
+          >
+            Crear Proyecto
+          </button>
         </form>
       </div>
-
-      <div className="bg-white">
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 }
