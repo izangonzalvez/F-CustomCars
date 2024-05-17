@@ -26,12 +26,6 @@ export function Navbar({ brandName, routes, action }) {
     navigate("/");
   };
 
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
   const roleId = localStorage.getItem('roleId');
 
   return (
@@ -46,21 +40,32 @@ export function Navbar({ brandName, routes, action }) {
                 alt="Brand Logo"
               ></img>
             </Link>
-            <div className={`pl-9 text-white hidden lg:flex lg:items-center lg:space-x-4 ${menuOpen ? 'hidden' : 'block'}`}>
-              <Link to="/project" className="mr-4">Proyectos </Link>
+            <div className="pl-9 text-white hidden lg:flex lg:items-center lg:space-x-4">
+              <div className="relative">
+                <Link to="/project" className="mr-4">
+                  Proyectos 
+                  <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg">
+                    <Link to="/ruta1" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Opción 1</Link>
+                    <Link to="/ruta2" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Opción 2</Link>
+                  </div>
+                </Link>
+              </div>
               <Link to="/community" className="mr-4">Comunidad </Link>
               <Link to="/contact" className="mr-4">Contacto </Link>
               <Link to="/prueba" className="mr-4">Prueba </Link>
-              {(roleId === "1" || roleId === "4") && <Link to="/proveedor/list" className="mr-4">Proveedores </Link>}
+              {(roleId === "1" || roleId === "4") && 
+                <div className="relative">
+                  <Link to="/proveedor/list" className="mr-4">
+                    Proveedores 
+                    <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg">
+                      <Link to="/ruta3" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Opción 3</Link>
+                      <Link to="/ruta4" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Opción 4</Link>
+                    </div>
+                  </Link>
+                </div>
+              }
               {roleId == "1" && <Link to="/contactList" className="mr-4">Lista de contacts </Link>}
             </div>
-          </div>
-          <div className="lg:hidden">
-            <button onClick={toggleMenu} className="focus:outline-none">
-              <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-              </svg>
-            </button>
           </div>
           {authToken ? (
             <div>
@@ -77,17 +82,6 @@ export function Navbar({ brandName, routes, action }) {
           )}
         </div>
       </nav>
-      <div className={`lg:hidden absolute top-16 right-0 left-0 bg-black bg-opacity-90 ${menuOpen ? 'block' : 'hidden'}`}>
-        <div className="flex flex-col items-center py-4 space-y-4">
-          <Link to="/project" className="text-white">Proyectos </Link>
-          <Link to="/community" className="text-white">Comunidad </Link>
-          <Link to="/chat" className="text-white">Chat </Link>
-          <Link to="/contact" className="text-white">Contacto </Link>
-          <Link to="/prueba" className="text-white">Prueba </Link>
-          {roleId == "4" && <Link to="/proveedor/list" className="text-white">Proveedores </Link>}
-          {roleId == "1" && <Link to="/contactList" className="text-white">Lista de contacts </Link>}
-        </div>
-      </div>
     </>
   );
 }
