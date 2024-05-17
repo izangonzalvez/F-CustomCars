@@ -53,7 +53,6 @@ export function Navbar({ brandName, routes, action }) {
               <Link to="/project" className="mr-4">Proyectos </Link>
               <Link to="/community" className="mr-4">Comunidad </Link>
               <Link to="/contact" className="mr-4">Contacto </Link>
-              <Link to="/prueba" className="mr-4">Prueba </Link>
               {(roleId == "1" || roleId == "4") && <Link to="/proveedor/add-spareparts" className="mr-4">Proveedores </Link>}
               {roleId == "1" && <Link to="/contactList" className="mr-4">Lista de contacts </Link>}
             </div>
@@ -86,7 +85,6 @@ export function Navbar({ brandName, routes, action }) {
           <Link to="/community" className="text-white">Comunidad </Link>
           <Link to="/chat" className="text-white">Chat </Link>
           <Link to="/contact" className="text-white">Contacto </Link>
-          <Link to="/prueba" className="text-white">Prueba </Link>
           {(roleId == "1" || roleId == "4") && <Link to="/proveedor/add-spareparts" className="text-white">Proveedores </Link>}
           {roleId == "1" && <Link to="/contactList" className="text-white">Lista de contacts </Link>}
         </div>
