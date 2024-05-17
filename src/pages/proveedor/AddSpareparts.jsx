@@ -50,8 +50,6 @@ export function AddSpareparts() {
                         <div className="flex justify-between">
                             <div>
                                 <button onClick={() => setShowBrakeListPopup(true)} className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg mr-2">Listar</button>
-                            </div>
-                            <div>
                                 <button onClick={() => setShowModelPopup3(true)} className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg">👁️</button>
                             </div>
                         </div>
@@ -81,8 +79,6 @@ export function AddSpareparts() {
                         <div className="flex justify-between">
                             <div>
                                 <button onClick={() => setShowEngineListPopup(true)} className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg mr-2">Listar</button>
-                            </div>
-                            <div>
                                 <button onClick={() => setShowModelPopup1(true)} className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg">👁️</button>
                             </div>
                         </div>
@@ -112,8 +108,6 @@ export function AddSpareparts() {
                         <div className="flex justify-between">
                             <div>
                                 <button onClick={() => setShowExhaustpipeListPopup(true)} className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg mr-2">Listar</button>
-                            </div>
-                            <div>
                                 <button onClick={() => setShowModelPopup2(true)} className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg">👁️</button>
                             </div>
                         </div>
@@ -199,8 +193,6 @@ export function AddSpareparts() {
                         <div className="flex justify-between">
                             <div>
                                 <button onClick={() => setShowWheelsListPopup(true)} className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg mr-2">Listar</button>
-                            </div>
-                            <div>
                                 <button onClick={() => setShowModelPopup4(true)} className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-r hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold py-2 px-4 rounded-full shadow-lg">👁️</button>
                             </div>
                         </div>

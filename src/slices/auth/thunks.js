@@ -18,7 +18,8 @@ export const doUser = (email) => {
   
           if (user) {
             localStorage.setItem('userId', user.id);
-            localStorage.setItem('roleId', user.role_id);
+            dispatch(setRoles(user.role_id))
+            //localStorage.setItem('roleId', user.role_id);
           } else {
             console.error("El usuario no fue encontrado en la respuesta del servidor.");
           }
