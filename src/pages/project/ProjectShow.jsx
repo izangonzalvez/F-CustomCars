@@ -5,6 +5,7 @@ import { showCars } from '@/slices/car/thunks';
 import { Footer } from "@/widgets/layout";
 import PDFButton from './PDFButton';
 import PaypalButton from './PayPalButton';
+import { Car } from '..';
 
 export function ProjectShow() {
   const { projectId } = useParams();
@@ -129,9 +130,7 @@ export function ProjectShow() {
           )}
         </div>
         <div className="w-1/2 flex justify-center items-center">
-          {car && (
-            <img src={car.photoUrl} alt="Foto del coche" className="max-w-full max-h-full object-cover" />
-          )}
+          <Car />
         </div>
       </div>
       <footer className="bg-white">

@@ -8,10 +8,11 @@ export function Car() {
   const [modelLoaded, setModelLoaded] = useState(false);
 
   useEffect(() => {
-    let scene, camera, renderer, controls, carModel;
+    let scene, camera, renderer, controls, brakeModel;
 
     function initThree() {
       scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xffffff); // Fondo blanco
       camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -30,16 +31,18 @@ export function Car() {
       if (!modelLoaded) {
         const loader = new OBJLoader();
         loader.load(
-          '/3d/bugatti.obj',
+          '/3d/lambo.obj',
           function (object) {
             object.traverse(function (child) {
               if (child instanceof THREE.Mesh) {
-                const material = new THREE.MeshBasicMaterial({ color: 0xffffff }); // Color blanco
+                const material = new THREE.MeshBasicMaterial({ color: 0x000000 }); // Color negro
                 child.material = material;
               }
             });
-            scene.add(object);
-            carModel = object; // Guardamos una referencia al modelo del coche
+            brakeModel = object; // Guardamos una referencia al modelo de freno
+            brakeModel.position.set(-4, 1, 0); // Ajustamos la posición del modelo para moverlo a la izquierda
+            brakeModel.scale.set(2, 2, 2); // Ajusta el tamaño del modelo (aumentado)
+            scene.add(brakeModel);
             setModelLoaded(true);
           },
           function (xhr) {
@@ -55,9 +58,9 @@ export function Car() {
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
-      if (carModel) {
-        // Rotamos el modelo del coche sobre su eje Y
-        carModel.rotation.y += 0.01; // Ajusta la velocidad de rotación según sea necesario
+      if (brakeModel) {
+        // Rotamos el modelo de freno sobre su eje Y
+        brakeModel.rotation.y += 0.01; // Ajusta la velocidad de rotación según sea necesario
       }
       renderer.render(scene, camera);
     }
@@ -70,9 +73,14 @@ export function Car() {
       scene.remove(...scene.children);
       renderer.dispose();
     };
-  }, []);
+  }, [modelLoaded]); // Agregamos modelLoaded como dependencia para que se ejecute solo cuando cambie
 
-  return <div ref={mountRef} />;
+  return (
+    <div
+      ref={mountRef}
+      style={{ width: '100%', height: '60vh', overflow: 'hidden' }}
+    />
+  );
 }
 
 export default Car;
