@@ -12,7 +12,7 @@ export function BrakeShow() {
 
     function initThree() {
       scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xffffff); // Color de fondo blanco
+      scene.background = new THREE.Color(0xffffff); 
       camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -35,12 +35,12 @@ export function BrakeShow() {
           function (object) {
             object.traverse(function (child) {
               if (child instanceof THREE.Mesh) {
-                const material = new THREE.MeshBasicMaterial({ color: 0x000000 }); // Color negro
+                const material = new THREE.MeshBasicMaterial({ color: 0x000000 }); 
                 child.material = material;
               }
             });
-            brakeModel = object; // Guardamos una referencia al modelo de freno
-            brakeModel.position.set(0, 1, 0); // Ajustamos la posición del modelo (ahora está 1 unidad más arriba)
+            brakeModel = object; 
+            brakeModel.position.set(0, 1, 0); 
             scene.add(brakeModel);
             setModelLoaded(true);
           },
@@ -58,8 +58,7 @@ export function BrakeShow() {
       requestAnimationFrame(animate);
       controls.update();
       if (brakeModel) {
-        // Rotamos el modelo de freno sobre su eje Y
-        brakeModel.rotation.y += 0.01; // Ajusta la velocidad de rotación según sea necesario
+        brakeModel.rotation.y += 0.01;
       }
       renderer.render(scene, camera);
     }
@@ -72,7 +71,7 @@ export function BrakeShow() {
       scene.remove(...scene.children);
       renderer.dispose();
     };
-  }, [modelLoaded]); // Agregamos modelLoaded como dependencia para que se ejecute solo cuando cambie
+  }, [modelLoaded]); 
 
   return (
     <div

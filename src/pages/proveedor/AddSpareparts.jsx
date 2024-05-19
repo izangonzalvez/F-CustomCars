@@ -18,6 +18,7 @@ import WheelList from './wheel/WheelList';
 import ExhaustpipeShow from './exhaustpipe/ExhaustpipeShow';
 import EngineShow from './engine/EngineShow';
 import BrakeShow from './brake/BrakeShow';
+import WheelShow from './wheel/WheelShow';
 
 export function AddSpareparts() {
     const [showBrakeListPopup, setShowBrakeListPopup] = useState(false);

@@ -34,12 +34,12 @@ export function ExhaustpipeShow() {
           function (object) {
             object.traverse(function (child) {
               if (child instanceof THREE.Mesh) {
-                const material = new THREE.MeshBasicMaterial({ color: 0xffffff }); // Color blanco
+                const material = new THREE.MeshBasicMaterial({ color: 0xffffff }); 
                 child.material = material;
               }
             });
-            exhaustModel = object; // Guardamos una referencia al modelo del tubo de escape
-            exhaustModel.position.set(0, 1, 0); // Ajustamos la posición del modelo (ahora está 1 unidad más arriba)
+            exhaustModel = object; 
+            exhaustModel.position.set(0, 1, 0); 
             scene.add(exhaustModel);
             setModelLoaded(true);
           },
@@ -57,8 +57,7 @@ export function ExhaustpipeShow() {
       requestAnimationFrame(animate);
       controls.update();
       if (exhaustModel) {
-        // Rotamos el modelo del tubo de escape sobre su eje Y
-        exhaustModel.rotation.y += 0.01; // Ajusta la velocidad de rotación según sea necesario
+        exhaustModel.rotation.y += 0.01; 
       }
       renderer.render(scene, camera);
     }
@@ -71,7 +70,7 @@ export function ExhaustpipeShow() {
       scene.remove(...scene.children);
       renderer.dispose();
     };
-  }, [modelLoaded]); // Agregamos modelLoaded como dependencia para que se ejecute solo cuando cambie
+  }, [modelLoaded]); 
 
   return (
     <div

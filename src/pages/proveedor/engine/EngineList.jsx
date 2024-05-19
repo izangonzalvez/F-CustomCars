@@ -34,11 +34,6 @@ export function EngineList() {
                                     <div>{`Combustible: ${engine.fuel}`}</div> 
                                     <div>{`Precio: ${engine.price}`}</div>
                                 </div>
-                                <div className="flex justify-between mt-4">
-                                    <div className="flex items-center space-x-2">
-                                        <Link to={`/engine/${engine.id}`} className="text-cyan-600">Ver detalles</Link>
-                                    </div>
-                                </div>
                             </div>
                         ))
                     )}

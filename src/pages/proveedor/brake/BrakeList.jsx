@@ -31,12 +31,6 @@ export function BrakeList() {
                                     <div>{`Estilo: ${brake.style}`}</div>
                                     <div>{`Modelo: ${brake.model}`}</div>
                                     <div>{`Precio: ${brake.price}`}</div>
-                                    <div>{`Proveedor ID: ${brake.proveedor_id}`}</div> {/* Mostrar ID del proveedor */}
-                                </div>
-                                <div className="flex justify-between mt-4">
-                                    <div className="flex items-center space-x-2">
-                                        <Link to={`/brake/${brake.id}`} className="text-cyan-600">Ver detalles</Link>
-                                    </div>
                                 </div>
                             </div>
                         ))

@@ -196,7 +196,6 @@ function ProjectEdit() {
               id="wheel"
               name="wheel"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              // value={car.wheel.id}
               defaultValue={car.wheel.id}
               onChange={(e) => setWheel(e.target.value)}
               required
@@ -213,7 +212,6 @@ function ProjectEdit() {
               id="engine"
               name="engine"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              // value={car.engine.id}
               defaultValue={car.engine.id}
               onChange={(e) => setEngine(e.target.value)}
               required
@@ -230,7 +228,6 @@ function ProjectEdit() {
               id="suspension"
               name="suspension"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              // value={car.suspension.id}
               defaultValue={car.suspension.id}
               onChange={(e) => setSuspension(e.target.value)}
               required
@@ -247,7 +244,6 @@ function ProjectEdit() {
               id="brake"
               name="brake"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              // value={car.brake.id}
               defaultValue={car.brake.id}
               onChange={(e) => setBrake(e.target.value)}
               required
@@ -264,7 +260,6 @@ function ProjectEdit() {
               id="exhaustpipe"
               name="exhaustpipe"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              // value={car.exhaustpipe.id}
               defaultValue={car.exhaustpipe.id}
               onChange={(e) => setExhaustpipe(e.target.value)}
               required
@@ -281,7 +276,6 @@ function ProjectEdit() {
               id="light"
               name="light"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              // value={car.light.id}
               defaultValue={car.light.id}
               onChange={(e) => setLight(e.target.value)}
               required
@@ -298,7 +292,6 @@ function ProjectEdit() {
               id="spoiler"
               name="spoiler"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              // value={car.spoiler.id}
               defaultValue={car.spoiler.id}
               onChange={(e) => setSpoiler(e.target.value)}
               required
@@ -315,7 +308,6 @@ function ProjectEdit() {
               id="sideskirt"
               name="sideskirt"
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-500 focus:ring-opacity-50"
-              // value={car.sideskirt.id}
               defaultValue={car.sideskirt.id}
               onChange={(e) => setSideskirt(e.target.value)}
               required

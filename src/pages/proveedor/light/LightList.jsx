@@ -31,12 +31,6 @@ export function LightList() {
                                     <div>{`Tipo: ${light.type}`}</div>
                                     <div>{`Color: ${light.color}`}</div>
                                     <div>{`Precio: ${light.price}`}</div>
-                                    <div>{`Proveedor ID: ${light.proveedor_id}`}</div> {/* Mostrar ID del proveedor */}
-                                </div>
-                                <div className="flex justify-between mt-4">
-                                    <div className="flex items-center space-x-2">
-                                        <Link to={`/light/${light.id}`} className="text-cyan-600">Ver detalles</Link>
-                                    </div>
                                 </div>
                             </div>
                         ))

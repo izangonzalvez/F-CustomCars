@@ -4,7 +4,6 @@ import PublishedCar from "./pages/project/PublishedCar";
 import Proveedor, { ProveedorRegister } from "./pages/proveedor/ProveedorRegister";
 
 import ProjectEdit from "./pages/project/ProjectEdit";
-import ListProveedor from "./pages/proveedor/ListProveedor";
 import ContactList from "./pages/contact/ContactList";
 import AddSpareparts from "./pages/proveedor/AddSpareparts";
 
@@ -60,19 +59,9 @@ export const routes = [
     element: <Register />,
   },
   {
-    name: "Prueba 3D",
-    path: "/prueba",
-    element: <Car />,
-  },
-  {
     name: "Proveedor Register",
     path: "/proveedor/register",
     element: <ProveedorRegister />,
-  },
-  {
-    name: "Proveedor List",
-    path: "/proveedor/list",
-    element: <ListProveedor />,
   },
   {
     name: "Proveedor Login",

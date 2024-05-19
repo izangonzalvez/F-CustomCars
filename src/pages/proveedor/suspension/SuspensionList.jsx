@@ -30,12 +30,6 @@ export function SuspensionList() {
                                     <div className="text-lg font-semibold mb-2">{suspension.name}</div>
                                     <div>{`Estilo: ${suspension.type}`}</div>
                                     <div>{`Precio: ${suspension.price}`}</div>
-                                    <div>{`Proveedor ID: ${suspension.proveedor_id}`}</div> {/* Mostrar ID del proveedor */}
-                                </div>
-                                <div className="flex justify-between mt-4">
-                                    <div className="flex items-center space-x-2">
-                                        <Link to={`/suspension/${suspension.id}`} className="text-cyan-600">Ver detalles</Link>
-                                    </div>
                                 </div>
                             </div>
                         ))

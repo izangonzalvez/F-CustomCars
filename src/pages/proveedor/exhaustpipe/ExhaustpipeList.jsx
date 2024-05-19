@@ -27,11 +27,9 @@ export function ExhaustpipeList() {
                         exhaustpipes.map(exhaustpipe => (
                             <div key={exhaustpipe.id} className="border rounded-lg shadow-md p-4 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 bg-white relative">
                                 <div className="flex flex-col">
-                                    {/* <div className="text-lg font-semibold mb-2">{exhaustpipe.name}</div> */}
                                     <div>{`Tamaño: ${exhaustpipe.size}`}</div>
                                     <div>{`Tipo: ${exhaustpipe.type}`}</div>
                                     <div>{`Precio: ${exhaustpipe.price}`}</div>
-                                    <div>{`Proveedor ID: ${exhaustpipe.proveedor_id}`}</div> 
                                 </div>
                                 <div className="flex justify-between mt-4">
                                     <div className="flex items-center space-x-2">

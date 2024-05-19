@@ -30,12 +30,6 @@ export function SideskirtList() {
                                     <div>{`Tamaño: ${sideskirt.size}`}</div>
                                     <div>{`Material: ${sideskirt.material}`}</div>
                                     <div>{`Precio: ${sideskirt.price}`}</div>
-                                    <div>{`Proveedor ID: ${sideskirt.proveedor_id}`}</div> {/* Mostrar ID del proveedor */}
-                                </div>
-                                <div className="flex justify-between mt-4">
-                                    <div className="flex items-center space-x-2">
-                                        <Link to={`/sideskirt/${sideskirt.id}`} className="text-cyan-600">Ver detalles</Link>
-                                    </div>
                                 </div>
                             </div>
                         ))

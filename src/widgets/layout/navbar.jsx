@@ -10,14 +10,11 @@ export function Navbar({ brandName, routes, action }) {
   const navigate = useNavigate();
 
   const { usuari, authToken, roleId } = useSelector((state) => state.auth);
-  //const [roleId, setRoleId] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setAuthToken(localStorage.getItem('authToken')))
     dispatch(setUser(localStorage.getItem('user')))
-    //setRoleId (localStorage.getItem('roleId'));
-    //console.log(localStorage.getItem('roleId'))
  
     console.log(authToken)
     console.log(usuari)

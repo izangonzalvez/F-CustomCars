@@ -31,15 +31,9 @@ export function Home() {
               <Typography
                 variant="h1"
                 color="white"
-                className="mb-6 font-black"
-              >
+                className="mb-6 font-black">
                 Convierte tus sueños en realidades sobre ruedas.
               </Typography>
-              {/* <Typography variant="lead" color="white" className="opacity-80">
-                This is a simple example of a Landing Page you can build using
-                Material Tailwind. It features multiple components based on the
-                Tailwind CSS and Material Design by Google.
-              </Typography> */}
               <Link to="/project" className="bg-transparent hover:bg-yellow-500 text-white font-semibold hover:text-black py-2 px-4 border border-white hover:border-transparent rounded">
                 Empieza con el tuyo
               </Link>
@@ -47,8 +41,6 @@ export function Home() {
           </div>
         </div>
       </div>
-
-      {/* 3 Cuadrados principales */}
       <section className="-mt-32 bg-white px-4 pb-20 pt-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -67,7 +59,6 @@ export function Home() {
         </div>
       </section>
 
-      {/* Cuadrados de TEAM */}
       <section className="px-4 pt-20 pb-48">
         <div className="container mx-auto">
           <PageTitle section="" heading="Proyectos de la comunidad">

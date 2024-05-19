@@ -32,12 +32,6 @@ export function SpoilerList() {
                                     <div>{`Tamaño: ${spoiler.size}`}</div>
                                     <div>{`Material: ${spoiler.material}`}</div>
                                     <div>{`Precio: ${spoiler.price}`}</div>
-                                    <div>{`Proveedor ID: ${spoiler.proveedor_id}`}</div> {/* Mostrar ID del proveedor */}
-                                </div>
-                                <div className="flex justify-between mt-4">
-                                    <div className="flex items-center space-x-2">
-                                        <Link to={`/spoiler/${spoiler.id}`} className="text-cyan-600">Ver detalles</Link>
-                                    </div>
                                 </div>
                             </div>
                         ))

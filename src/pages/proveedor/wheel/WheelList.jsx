@@ -32,12 +32,6 @@ export function WheelList() {
                                     <div>{`Estilo: ${wheels.type}`}</div>
                                     <div>{`Modelo: ${wheels.inch        }`}</div>
                                     <div>{`Precio: ${wheels.price}`}</div>
-                                    <div>{`Proveedor ID: ${wheels.proveedor_id}`}</div> {/* Mostrar ID del proveedor */}
-                                </div>
-                                <div className="flex justify-between mt-4">
-                                    <div className="flex items-center space-x-2">
-                                        <Link to={`/wheels/${wheels.id}`} className="text-cyan-600">Ver detalles</Link>
-                                    </div>
                                 </div>
                             </div>
                         ))
