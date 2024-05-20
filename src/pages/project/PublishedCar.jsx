@@ -6,15 +6,14 @@ import { listCars, deleteCar as deleteCarAction, listPublished } from '@/slices/
 import FloatingChatButton from '../chat/FloatingChatButton';
 
 export function PublishedCar() {
-  const { usuario, authToken } = useSelector(state => state.auth);
+  const { usuario, authToken, roleId } = useSelector(state => state.auth);
   const { cars } = useSelector(state => state.cars);
   const dispatch = useDispatch();
   const userId = localStorage.getItem('userId');
-  const roleId = localStorage.getItem('roleId');
   useEffect(() => {
     dispatch(listPublished(authToken));
   }, []);
-
+  console.log(roleId)
   const deleteCar = (carId) => {
     dispatch(deleteCarAction(carId, authToken));
     dispatch(listPublished(authToken));
